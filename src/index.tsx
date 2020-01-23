@@ -538,6 +538,7 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
     console.log(nodes);
     return (
       <LazyLoad height={"100%"} once>
+        <p>{JSON.stringify(nodes)}</p>
         <table className={cn(this.styles.diffContainer, { [this.styles.splitView]: splitView })}>
           <tbody>
             {title}
