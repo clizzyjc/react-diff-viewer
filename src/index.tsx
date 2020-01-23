@@ -1,7 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import cn from 'classnames';
-import LazyLoad from 'react-lazyload';
 
 import {
   computeLineInformation,
@@ -520,7 +519,9 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
     }
 
     this.styles = this.computeStyles(this.props.styles, useDarkTheme);
-    const nodes = this.renderDiff();
+    const nodes = this.renderDiff().filter((val) => {
+      return val != null;
+    });
 
     const title = (leftTitle || rightTitle)
       && <tr>
@@ -535,17 +536,13 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
           </td>
         }
       </tr>;
-    console.log(nodes);
     return (
-      <LazyLoad height={"100%"} once>
-        <p>{JSON.stringify(nodes)}</p>
         <table className={cn(this.styles.diffContainer, { [this.styles.splitView]: splitView })}>
           <tbody>
             {title}
             {nodes}
           </tbody>
         </table>
-      </LazyLoad>
     );
   };
 }
