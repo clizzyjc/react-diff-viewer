@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import cn from 'classnames';
+import { FixedSizeList} from 'react-window';
 
 import {
   computeLineInformation,
@@ -534,12 +535,23 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
           </td>
         }
       </tr>;
-    console.log(nodes);
+    const Row = ({ index, style }) => (
+      React.cloneElement(nodes[index])
+    );
     return (
       <table className={cn(this.styles.diffContainer, { [this.styles.splitView]: splitView })}>
         <tbody>
           {title}
-          {nodes}
+          {console.log(nodes)}
+          <FixedSizeList
+              height={700}
+              itemCount={nodes.length}
+              itemSize={27}
+              width={'100vw'}
+          >
+            {Row}
+          </FixedSizeList>
+          {/* {nodes} */}
         </tbody>
       </table>
     );

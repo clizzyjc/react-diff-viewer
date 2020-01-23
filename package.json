@@ -34,7 +34,8 @@
 		"diff": "^4.0.1",
 		"emotion": "^10.0.14",
 		"memoize-one": "^5.0.4",
-		"prop-types": "^15.6.2"
+		"prop-types": "^15.6.2",
+		"react-window": "^1.8.5"
 	},
 	"devDependencies": {
 		"@types/classnames": "^2.2.6",
