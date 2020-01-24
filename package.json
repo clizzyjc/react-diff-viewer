@@ -33,6 +33,7 @@
 		"create-emotion": "^10.0.14",
 		"diff": "^4.0.1",
 		"emotion": "^10.0.14",
+		"jsonschema": "^1.2.5",
 		"memoize-one": "^5.0.4",
 		"prop-types": "^15.6.2"
 	},

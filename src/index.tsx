@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import cn from 'classnames';
+import {Validator} from "jsonschema";
 
 import {
   computeLineInformation,
@@ -302,6 +303,7 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
     { left, right }: LineInformation,
     index: number,
   ): JSX.Element => {
+    console.log('left')
     return (
       <tr key={index} className={this.styles.line}>
         {this.renderLine(
@@ -442,12 +444,123 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
    */
   private renderDiff = (): JSX.Element[] => {
     const { oldValue, newValue, splitView, disableWordDiff, compareMethod } = this.props;
-    const { lineInformation, diffLines } = computeLineInformation(
-      oldValue,
-      newValue,
-      disableWordDiff,
-      compareMethod,
-    );
+    var v = new Validator();
+
+    var subscriptionSchema = {
+      "id": "/All",
+  
+      "type": "object",
+  
+     "properties": {
+  
+      "id": {
+  
+        "type": "string"
+  
+      },
+  
+      "notificationType": {
+  
+        "type": "string"
+  
+      },
+  
+      "subscriptionId": {
+  
+        "type": "string",
+  
+      },
+  
+      "notificationStatus": {
+  
+        "type": "string",
+  
+      },
+      "operationState": {
+  
+        "type": "string",
+  
+      },
+      "operation": {
+  
+        "type": "string",
+  
+      },
+      "isAutomaticInvocation": {
+  
+        "type": "boolean",
+  
+      },
+      "vnfLcmOpOccId": {
+  
+        "type": "string",
+  
+      },
+  
+      "_links": {
+  
+        "type": "object",
+  
+        "properties": {
+  
+          "vnfInstance": {
+  
+            "type": "object",
+            "href": {
+              "type": "string"
+            }
+          },
+  
+          "subscription": {
+  
+            "type": "object",
+            "href": {
+              "type": "string"
+            }
+          },
+          "vnfLcmOpOcc": {
+  
+            "type": "object",
+            "href": {
+              "type": "string"
+            }
+          }
+  
+        }
+  
+      }
+    }
+  
+  };
+      
+  var content = newValue
+  var result = content.substring((content.indexOf("Body  : "))+8,content.indexOf("[2020",content.indexOf("Body  : ")+1)-1);
+  var p = JSON.parse(result);
+  var listofErrors : { property: string, instance: string}[] = [];
+  var apiType = "subscription"
+  var x
+  if(apiType==="subscription"){
+    x = v.validate(p, subscriptionSchema);
+  }
+  
+  if(x!=null){
+    x.errors.forEach(element => {
+      listofErrors.push({
+        property :element.property.replace("instance.",""),
+        instance :element.instance
+      });
+    });
+  }
+  
+
+  const { lineInformation, diffLines } = computeLineInformation(
+    oldValue,
+    newValue,
+    disableWordDiff,
+    compareMethod,
+    listofErrors,
+  );
+
     const extraLines = this.props.extraLinesSurroundingDiff < 0
       ? 0
       : this.props.extraLinesSurroundingDiff;
@@ -456,29 +569,29 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
       (line: LineInformation, i: number): JSX.Element => {
         const diffBlockStart = diffLines[0];
         const currentPosition = diffBlockStart - i;
-        if (this.props.showDiffOnly) {
-          if (currentPosition === -extraLines) {
-            skippedLines = [];
-            diffLines.shift();
-          }
-          if (
-            line.left.type === DiffType.DEFAULT
-            && (currentPosition > extraLines
-              || typeof diffBlockStart === 'undefined')
-            && !this.state.expandedBlocks.includes(diffBlockStart)
-          ) {
-            skippedLines.push(i + 1);
-            if (i === lineInformation.length - 1 && skippedLines.length > 1) {
-              return this.renderSkippedLineIndicator(
-                skippedLines.length,
-                diffBlockStart,
-                line.left.lineNumber,
-                line.right.lineNumber,
-              );
-            }
-            return null;
-          }
-        }
+        // if (this.props.showDiffOnly) {
+        //   if (currentPosition === -extraLines) {
+        //     skippedLines = [];
+        //     diffLines.shift();
+        //   }
+        //   if (
+        //     line.left.type === DiffType.DEFAULT
+        //     && (currentPosition > extraLines
+        //       || typeof diffBlockStart === 'undefined')
+        //     && !this.state.expandedBlocks.includes(diffBlockStart)
+        //   ) {
+        //     skippedLines.push(i + 1);
+        //     if (i === lineInformation.length - 1 && skippedLines.length > 1) {
+        //       return this.renderSkippedLineIndicator(
+        //         skippedLines.length,
+        //         diffBlockStart,
+        //         line.left.lineNumber,
+        //         line.right.lineNumber,
+        //       );
+        //     }
+        //     return null;
+        //   }
+        // }
 
         const diffNodes = splitView
           ? this.renderSplitView(line, i)
@@ -517,7 +630,6 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
     if (typeof oldValue !== 'string' || typeof newValue !== 'string') {
       throw Error('"oldValue" and "newValue" should be strings');
     }
-
     this.styles = this.computeStyles(this.props.styles, useDarkTheme);
     const nodes = this.renderDiff().filter((val) => {
       return val != null;

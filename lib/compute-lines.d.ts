@@ -47,5 +47,8 @@ export interface JsDiffChangeObject {
  * @param disableWordDiff Flag to enable/disable word diff.
  * @param compareMethod JsDiff text diff method from https://github.com/kpdecker/jsdiff/tree/v4.0.1#api
  */
-declare const computeLineInformation: (oldString: string, newString: string, disableWordDiff?: boolean, compareMethod?: string) => ComputedLineInformation;
+declare const computeLineInformation: (oldString: string, newString: string, disableWordDiff: boolean, compareMethod: string, listoferrors: {
+    property: string;
+    instance: string;
+}[]) => ComputedLineInformation;
 export { computeLineInformation };

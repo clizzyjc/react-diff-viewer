@@ -91,6 +91,7 @@ const computeDiff = (
   oldValue: string,
   newValue: string,
   compareMethod: string = DiffMethod.CHARS,
+  didNotError: Boolean,
 ): ComputedDiffInformation => {
   const diffArray: JsDiffChangeObject[] = jsDiff[compareMethod](oldValue, newValue);
   const computedDiff: ComputedDiffInformation = {
@@ -100,13 +101,23 @@ const computeDiff = (
   diffArray
     .forEach(({ added, removed, value }): DiffInformation => {
       const diffInformation: DiffInformation = {};
-      if (added) {
-        diffInformation.type = DiffType.ADDED;
+      
+      if (added){
+        if(didNotError) {
+          diffInformation.type = DiffType.ADDED;
+        } else {
+          diffInformation.type = DiffType.REMOVED;
+        }
         diffInformation.value = value;
         computedDiff.right.push(diffInformation);
       }
+
       if (removed) {
-        diffInformation.type = DiffType.REMOVED;
+        if(didNotError) {
+          diffInformation.type = DiffType.ADDED;
+        } else {
+          diffInformation.type = DiffType.REMOVED;
+        }
         diffInformation.value = value;
         computedDiff.left.push(diffInformation);
       }
@@ -139,6 +150,7 @@ const computeLineInformation = (
   newString: string,
   disableWordDiff: boolean = false,
   compareMethod: string = DiffMethod.CHARS,
+  listoferrors:  { property: string, instance: string}[] ,
 ): ComputedLineInformation => {
   const diffArray = diff.diffLines(
     oldString.trimRight(),
@@ -193,18 +205,30 @@ const computeLineInformation = (
                 lineNumber,
                 type,
               } = getLineInformation(nextDiff.value, diffIndex, true, false, true)[0].right;
-              // When identified as modification, push the next diff to ignore
-              // list as the next value will be added in this line computation as
-              // right and left values.
               ignoreDiffIndexes.push(`${diffIndex + 1}-${lineIndex}`);
               right.lineNumber = lineNumber;
-              right.type = type;
+             
+              var flag = true
+              listoferrors.forEach(element => {
+                
+                if(rightValue.includes(element.property) && rightValue.includes(element.instance)){
+                  right.type = DiffType.REMOVED
+                  left.type = DiffType.REMOVED
+                  flag = false
+                }
+
+                if(flag == true){
+                  right.type = DiffType.ADDED
+                  left.type = DiffType.ADDED
+                }
+              });
+              
               // Do word level diff and assign the corresponding values to the
               // left and right diff information object.
               if (disableWordDiff) {
                 right.value = rightValue;
               } else {
-                const computedDiff = computeDiff(line, rightValue as string, compareMethod);
+                const computedDiff = computeDiff(line, rightValue as string, compareMethod,flag);
                 right.value = computedDiff.right;
                 left.value = computedDiff.left;
               }
@@ -213,8 +237,21 @@ const computeLineInformation = (
         } else {
           rightLineNumber += 1;
           right.lineNumber = rightLineNumber;
-          right.type = DiffType.ADDED;
           right.value = line;
+          var flag = true
+              listoferrors.forEach(element => {
+                
+                if(right.value.includes(element.property) && right.value.includes(element.instance)){
+                  right.type = DiffType.REMOVED
+                  left.type = DiffType.REMOVED
+                  flag = false
+                }
+
+                if(flag == true){
+                 right.type = DiffType.ADDED
+                  left.type = DiffType.ADDED
+                }
+              });
         }
       } else {
         leftLineNumber += 1;
