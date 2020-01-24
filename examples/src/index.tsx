@@ -1,7 +1,6 @@
-require('./style.scss');
+// require('./style.scss');
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-
 import ReactDiff, { DiffMethod } from '../../lib/index';
 
 const oldJs = require('./diff/javascript/old.rjs').default;
@@ -10,9 +9,12 @@ const newJs = require('./diff/javascript/new.rjs').default;
 const logo = require('../../logo.png');
 
 interface ExampleState {
+  content1: string;
+  content2: string;
   splitView?: boolean;
   highlightLine?: string[];
   language?: string;
+  listoferrors: { property: string , instance: string};
   enableSyntaxHighlighting?: boolean;
   compareMethod?: DiffMethod;
 }
@@ -23,87 +25,134 @@ class Example extends React.Component<{}, ExampleState> {
   public constructor(props: any) {
     super(props);
     this.state = {
-      highlightLine: [],
-      enableSyntaxHighlighting: true,
+      content1: null,
+      content2: null
     };
   }
 
-  private onLineNumberClick = (
-    id: string,
-    e: React.MouseEvent<HTMLTableCellElement>,
-  ): void => {
-    let highlightLine = [id];
-    if (e.shiftKey && this.state.highlightLine.length === 1) {
-      const [dir, oldId] = this.state.highlightLine[0].split('-');
-      const [newDir, newId] = id.split('-');
-      if (dir === newDir) {
-        highlightLine = [];
-        const lowEnd = Math.min(Number(oldId), Number(newId));
-        const highEnd = Math.max(Number(oldId), Number(newId));
-        for (let i = lowEnd; i <= highEnd; i++) {
-          highlightLine.push(`${dir}-${i}`);
-        }
-      }
+  getFile = (target: any,state : any) => {
+    const input = target;
+    // this.setState({
+    //   [`${state}title`]: target.value.replace(/^.*[\\\/]/, '')
+    // })   
+    if ('files' in input && input.files.length > 0) {
+      this.placeFileContent(
+        state,
+        input.files[0])
     }
-    this.setState({
-      highlightLine,
-    });
+  };
+  
+  placeFileContent= (state: any, file: any) =>{
+    this.readFileContent(file).then( (content:string) => {
+      while(content.includes('RAW Re')) {
+        var temp = content.substring(content.indexOf("RAW Re"), content.indexOf("----------------------------------------------------",content.indexOf("RAW Re")+1)+52);
+        content = content.replace(temp,"");
+      }
+      this.setState({
+        [`${state}`] : content,
+      })
+    }).catch(error => console.log(error))
+
+  };
+  
+  readFileContent = (file: any) => {
+    const reader = new FileReader()
+    return new Promise((resolve, reject) => {
+      reader.onload = event => resolve(event.target.result)
+      reader.onerror = error => reject(error)
+      reader.readAsText(file)
+    })
   };
 
-  private syntaxHighlight = (str: string): any => {
-    if (!str) return;
-    const language = P.highlight(str, P.languages.javascript);
-    return <span dangerouslySetInnerHTML={{ __html: language }} />;
-  };
+  clickButton = () =>{
+    this.getFile(document.getElementById('file1'),'content1');
+    this.getFile(document.getElementById('file2'),'content2');
+  };;
 
+  // downloadCapture = () => {
+  //   const htmlDocStr = capture(OutputType.STRING);
+  //   var bl = new Blob([htmlDocStr], {type: "text/html"});
+  //   var a = document.createElement("a");
+  //   a.href = URL.createObjectURL(bl);
+  //   a.download = "Comparison.html";
+  //   a.hidden = true;
+  //   document.body.appendChild(a);
+  //   a.innerHTML = "something random - nobody will see this, it doesn't matter what you put here";
+  //   a.click();
+  // };
   public render(): JSX.Element {
-
+    const newStyles = {
+      variables: {
+        highlightBackground: '#fefed5',
+        highlightGutterBackground: '#ffcd3c',
+      },
+      // line: {
+      //   padding: '10px 2px',
+      //   '&:hover': {
+      //     background: '#a26ea1',
+      //   },
+      // },
+      line: {
+        wordBreak: 'break-word',
+      },
+    };
     return (
-      <div className="react-diff-viewer-example">
-        <div className="radial"></div>
-        <div className="banner">
-          <div className="img-container">
-            <img src={logo} alt="React Diff Viewer Logo" />
-          </div>
-          <p>
-            A simple and beautiful text diff viewer made with{' '}
-            <a href="https://github.com/kpdecker/jsdiff" target="_blank">
-              Diff{' '}
-            </a>
-            and{' '}
-            <a href="https://reactjs.org" target="_blank">
-              React.{' '}
-            </a>
-            Featuring split view, inline view, word diff, line highlight and more.
-          </p>
-          <div className="cta">
-            <a href="https://github.com/praneshr/react-diff-viewer#install">
-              <button type="button" className="btn btn-primary btn-lg">
-                Documentation
-              </button>
-            </a>
-          </div>
-        </div>
-        <div className="diff-viewer">
-          <ReactDiff
-            highlightLines={this.state.highlightLine}
-            onLineNumberClick={this.onLineNumberClick}
-            oldValue={oldJs}
-            splitView
-            newValue={newJs}
-            renderContent={this.syntaxHighlight}
-            useDarkTheme
-            leftTitle="webpack.config.js master@2178133 - pushed 2 hours ago."
-            rightTitle="webpack.config.js master@64207ee - pushed 13 hours ago."
-          />
-        </div>
-        <footer>
-          Made with 💓 by{' '}
-          <a href="https://praneshravi.in" target="_blank">
-            Pranesh Ravi
-          </a>
-        </footer>
-      </div>
+      <React.Fragment>
+        <div>
+      {/* <Layout style={{padding: 30, paddingBottom: 20}}> */}
+      {/* <Row>
+        <Col span={14} offset={4}> */}
+        <label>Upload file 1 : </label>
+        <input type="file" accept=".txt" id="file1"  name="file1"/>
+
+        <label>Upload file 2 : </label>
+        <input type="file" accept=".txt" id="file2"  name="file2"/>
+
+        <label>select API : </label>
+        <select id = "selectID">
+        <option value="subscription">Subscription</option>
+        <option value="termination">Termination</option>
+        <option value="instantiation">Instantiation</option>
+        <option value="others">Others</option>
+        </select>
+
+        {/* </Col> */}
+      <br/>
+      <button onClick={this.clickButton}>Click me</button>
+
+      {/* </Row> */}
+       {/* <Row style={{marginTop: 30}}> */}
+           {/* <Col span={12} offset={8}> */}
+             {/* <Button type="primary" icon="check" id="diff" onClick={this.clickButton} style={{marginRight:50}} size="small">Check difference</Button> */}
+             {/* <Button type="primary" onClick={this.downloadCapture} icon="download" size="small"> */}
+               {/* Download HTML */}
+             {/* </Button> */}
+           {/* </Col> */}
+       {/* </Row> */}
+       {/* <Row style={{marginTop: 10}}> */}
+         {/* <Col span={10} offset={6}> */}
+          <p id="errorID">Errors: - </p>
+          <p id="messageID">Message: </p>
+         {/* </Col> */}
+       {/* </Row> */}
+      <br/>
+       {/* <Row> */}
+           {/* <Col span={24}> */}
+            { this.state.content1 &&this.state.content2 && <ReactDiff
+                styles={newStyles}
+                oldValue={this.state.content1}
+                newValue={this.state.content2}
+                splitView={true}
+                showDiffOnly={false}
+                useDarkTheme={false}
+              />
+            }
+             
+         {/* </Col> */}
+       {/* </Row> */}
+       {/* </Layout> */}
+    </div>
+    </React.Fragment>
     );
   }
 }

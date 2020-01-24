@@ -1,63 +1,114 @@
-var path = require('path');
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var WriteFilePlugin = require('write-file-webpack-plugin');
-module.exports = {
-  entry: [
-    'webpack/hot/dev-server',
-    'webpack-hot-middleware/client?reload=true',
-    path.join(__dirname, 'app/main.js')
+t_time : 2020-01-07 11:10:07 +0900
+----------------------------------------------------
+[2020-01-07 11:10:07 +0900]  Request Details:
+[2020-01-07 11:10:07 +0900]  Path  : /
+[2020-01-07 11:10:07 +0900]  Header: {
+  "authorization": [
   ],
-  output: {
-    path: path.join(__dirname, '/dist/'),
-    filename: '[name].js',
-    publicPath: '/'
-  },
-  module: {
-    loaders: [
-      {
-        test: /\.js?$/,
-        loader: 'babel',
-        exclude: /node_modules|lib/,
-      },
-      {
-        test: /\.json?$/,
-        loader: 'json'
-      },
-      {
-        test: /\.css$/,
-        loader: 'style!css?modules&localIdentName=[hash:base64:5]'
-      },
-      {
-        test: /\.scss$/,
-        loaders: [
-          'style?sourceMap',
-          'css?modules&importLoaders=1',
-          'sass?sourceMap'
-        ],
-        exclude: /node_modules|lib/
-      },
-    ],
-  },
-  plugins: [
-    new WriteFilePlugin(),
-    new ExtractTextPlugin('app.css', {
-      allChunks: true
-    }),
-    new HtmlWebpackPlugin({
-      template: 'app/index.tpl.html',
-      inject: 'body',
-      filename: 'index.html'
-    }),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('dev')
-    })
+  "accept": [
+    "application/json, application/*+json"
   ],
-  node: {
-    fs: 'empty'
+  "content-type": [
+    "application/json;charset=UTF-8"
+  ],
+  "content-length": [
+    "974"
+  ],
+  "host": [
+    "dummy-nfvo-ops-Line2.mano.docomo.ne.jp:13202"
+  ],
+  "connection": [
+    "Keep-Alive"
+  ],
+  "user-agent": [
+    "Apache-HttpClient/4.5.3 (Java/1.8.0_171)"
+  ],
+  "accept-encoding": [
+    "gzip,deflate"
+  ]
+}
+--
+request_line : POST / HTTP/1.1
+request_method : POST
+unparsed_uri : /
+http_version : 1.1
+request_uri : https://dummy-nfvo-ops-Line2.mano.docomo.ne.jp:13202/
+raw_header : ["Authorization: Bearer eyJraWQiOiJyc2ExIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI0MmU0M2ZhXpwIjoiNDJlNDNmYTktMzI5Yy00YTE2LWEzZDYtZjU0ZWE4Nzg0MzQ0Iiwic2NvcGUiOiJwcm9maZtLXQxLm1hbm8uZG9jb21vLm5lLmpwIiwidHlwIjoiQmVhcmVyIiwiZXhwIjoxNTYyNjY1OTMwLCsInRlbmFudC1pZCI6ImRlZmF1bHQifQ.JkZD3FpQfSrm8AYU_2F7Q_NnOBS7aVa7kJcg_LsvUxphtUvxZdRkkRkZxt1zM7Lk5lN1wS6qfA02gMpslVnAsl5iQrPTIuxjIVp2zGPhTbyVN4fhd8ZLSW-6FCj7CoW9dMsHDE8gy5vSrfCt_stAefj031-Kienfq2Hb9Mud0bsKM9CwfOvg\r\n", "Accept: application/json, application/*+json\r\n", "Content-Type: application/json;charset=UTF-8\r\n", "Content-Length: 974\r\n", "Host: dummy-nfvo-ops-Line2.mano.docomo.ne.jp:13202\r\n", "Connection: Keep-Alive\r\n", "User-Agent: Apache-HttpClient/4.5.3 (Java/1.8.0_171)\r\n", "Accept-Encoding: gzip,deflate\r\n"]
+header : {"authorization"=>["Bearer eyJraWQiOiJyc2ExIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI0MmU0M2ZhXpwIjoiNDJlNDNmYTktMzI5Yy00YTE2LWEzZDYtZjU0ZWE4Nzg0MzQ0Iiwic2NvcGUiOiJwcm9maZtLXQxLm1hbm8uZG9jb21vLm5lLmpwIiwidHlwIjoiQmVhcmVyIiwiZXhwIjoxNTYyNjY1OTMwLCsInRlbmFudC1pZCI6ImRlZmF1bHQifQ.JkZD3FpQfSrm8AYU_2F7Q_NnOBS7aVa7kJcg_LsvUxphtUvxZdRkkRkZxt1zM7Lk5lN1wS6qfA02gMpslVnAsl5iQrPTIuxjIVp2zGPhTbyVN4fhd8ZLSW-6FCj7CoW9dMsHDE8gy5vSrfCt_stAefj031-Kienfq2Hb9Mud0bsKM9CwfOvg"], "accept"=>["application/json, application/*+json"], "content-type"=>["application/json;charset=UTF-8"], "content-length"=>["974"], "host"=>["dummy-nfvo-ops-Line2.mano.docomo.ne.jp:13202"], "connection"=>["Keep-Alive"], "user-agent"=>["Apache-HttpClient/4.5.3 (Java/1.8.0_171)"], "accept-encoding"=>["gzip,deflate"]}
+body : {"id":"905d2fd2-3d46-9f3e-dee2-9c1c216e33f9","notificationType":"VnfLcmOperationOccurrenceNotification","subscriptionId":"21c0da01-df3f-6660-1cfe-bda78ac1bae9","timeStamp":"2020-01-07T02:13:12Z","notificationStatus":"START","operationState":"PROCESSING","vnfInstanceId":"52040bf8-da53-40cb-9a78-c4be52732ec7","operation":"MODIFY_INFO","isAutomaticInvocation":false,"vnfLcmOpOccId":"1423fb74-b862-4d7b-8349-a41992d5ded5","_links":{"vnfInstance":{"href":"https://vnfm-n-2-nfvo2.mano.docomo.ne.jp/vnfm/0e8a2883-df5d-42aa-9d84-2b02137ef479/sol003_251/vnflcm/v1/vnf_instances/52040bf8-da53-40cb-9a78-c4be52732ec7"},"subscription":{"href":"https://vnfm-n-2-nfvo2.mano.docomo.ne.jp/vnfm/0e8a2883-df5d-42aa-9d84-2b02137ef479/sol003_251/vnflcm/v1/subscriptions/21c0da01-df3f-6660-1cfe-bda78ac1bae9"},"vnfLcmOpOcc":{"href":"https://vnfm-n-2-nfvo2.mano.docomo.ne.jp/vnfm/0e8a2883-df5d-42aa-9d84-2b02137ef479/sol003_251/vnflcm/v1/vnf_lcm_op_occs/1423fb74-b862-4d7b-8349-a41992d5ded5"}}}
+request_time : 2020-01-07 11:10:07 +0900
+----------------------------------------------------
+[2020-01-07 11:10:07 +0900]  Request Details:
+[2020-01-07 11:10:07 +0900]  Path  : /
+[2020-01-07 11:10:07 +0900]  Header: {
+  "authorization": [
+    "Bearer eyJraWQiOiJyc2ExIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI0MmU0M2ZhXpwIjoiNDJlNDNmYTktMzI5Yy00YTE2LWEzZDYtZjU0ZWE4Nzg0MzQ0Iiwic2NvcGUiOiJwcm9maZtLXQxLm1hbm8uZG9jb21vLm5lLmpwIiwidHlwIjoiQmVhcmVyIiwiZXhwIjoxNTYyNjY1OTMwLCsInRlbmFudC1pZCI6ImRlZmF1bHQifQ.JkZD3FpQfSrm8AYU_2F7Q_NnOBS7aVa7kJcg_LsvUxphtUvxZdRkkRkZxt1zM7Lk5lN1wS6qfA02gMpslVnAsl5iQrPTIuxjIVp2zGPhTbyVN4fhd8ZLSW-6FCj7CoW9dMsHDE8gy5vSrfCt_stAefj031-Kienfq2Hb9Mud0bsKM9CwfOvg"
+  ],
+  "accept": [
+    "application/json, application/*+json"
+  ],
+  "content-type": [
+    "application/json;charset=UTF-8"
+  ],
+  "content-length": [
+    "974"
+  ],
+  "host": [
+    "dummy-nfvo-ops-Line2.mano.docomo.ne.jp:13202"
+  ],
+  "connection": [
+    "Keep-Alive"
+  ],
+  "user-agent": [
+    "Apache-HttpClient/4.5.3 (Java/1.8.0_171)"
+  ],
+  "accept-encoding": [
+    "gzip,deflate"
+  ]
+}
+[2020-01-07 11:10:07 +0900]  Body  : {
+  "id": "251c1bd1-3d46-9f3e-dee2-9c1c216e33f9",
+  "notificationType": "VnfLcmOperationOccurrenceNotification",
+  "subscriptionId": "21c0da01-df3f-6660-1cfe-bda78ac1bae9",
+  "timeStamp": "2020-01-07T02:13:12Z",
+  "notificationStatus": "UPDATE",
+  "somethhing": "UPDATE",
+  "operationState": "COMPLETED",
+  "vnfInstanceId": "52040bf8-da53-40cb-9a78-c4be52732ec7",
+  "operation": 123,
+  "isAutomaticInvocation": "I am an invalid value",
+  "vnfLcmOpOccId": "1423fb74-b862-4d7b-8349-a41992d5ded5",
+  "_links": {
+    "vnfInstance": {
+      "href": "https://vnfm-n-2-nfvo2.mano.docomo.ne.jp/vnfm/0e8a2883-df5d-42aa-9d84-2b02137ef479/sol003_251/vnflcm/v1/vnf_instances/52040bf8-da53-40cb-9a78-c4be52732ec7"
+    },
+    "subscription": {
+      "href": "https://vnfm-n-2-nfvo2.mano.docomo.ne.jp/vnfm/0e8a2883-df5d-42aa-9d84-2b02137ef479/sol003_251/vnflcm/v1/subscriptions/21c0da01-df3f-6660-1cfe-bda78ac1bae9"
+    },
+    "vnfLcmOpOcc": {
+      "href": "b74-b862-4d7b-8349-a41992d5ded5"
+    }
   }
-};
+}
+[2020-01-07 11:10:07 +0900]
+[2020-01-07 11:10:07 +0900]  JSON config to load: /root/NFVO_OPS_Sim_Multi/conf/json-config/notification/modify_info/nfvo_notification_post_config.json
+[2020-01-07 11:10:07 +0900]
+[2020-01-07 11:10:07 +0900]   RAW Response ----------
+header : {"authorization"=>"eyJraWQiOiJyc2ExIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIzY2E3ODFkZS02Mjg4LTQ2ZmUtOTNlMC0yNGRlZGEwNmYwYzciLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOltdfSwiYXpwIjoiM2NhNzgxZGUtNjI4OC00NmZlLTkzZTAtMjRkZWRhMDZmMGM3Iiwic2NvcGUiOiJleHRlcm5hbF92bmZfbGNtX29wX29jY19ub3RpZmljYXRpb25fc2VuZCB2bmZfbGNtX3dyaXRlIHByb2ZpbGUgdm5mX2xjbV9yZWFkIHZuZl9pbmRfcmVhZCIsImlzcyI6Imh0dHA6XC9cL2lkZW50aXR5LW1hbmFnZW1lbnQtaWRwLnRtZzItY2x1c3Rlci52bmZtLXQyLm1hbm8uZG9jb21vLm5lLmpwIiwidHlwIjoiQmVhcmVyIiwiZXhwIjoxNTc4MzY1NTU1LCJpYXQiOjE1NzgzNjE5NTUsImp0aSI6IjI2NzFlMTEyLWEwZjktNGI2OC1hZDYwLTIwMDg2NTIwNzg4NSIsInRlbmFudC1pZCI6ImRlZmF1bHQifQ.MBPB6XluYhHjfW0tWtoOvryqArWho_5rAZwnAZnLLp6nx2UoaYw8om0_Iyg9U_VuFIThwPvGhH8EqtU7Ep637z3GRxpomja8ozb1ZKV3mo9-iRI8IHEYxGvuG-8aQc1wBm80zH9RT-nD7olHwCREyaQIgbFsekPeFPsO8CQ1QUgGAtB-_hbemSSTnlHvGCFThFLUi9n1T4f8LUwn-zS1_0HBOOrSltvBFHeUw5mPcYh1hcKjHmCYCsmWGkPIYtCYc_Jw8OFtkic_QdYqP4CHTuMvjlk7aAhSQph4KBDiyhRb2gAQrPj47Iix1zk7IcAJVTRBvTRvJIkQgIW2Azvg7w", "www-authenticate"=>"eyJraWQiOiJyc2ExIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIzY2E3ODFkZS02Mjg4LTQ2ZmUtOTNlMC0yNGRlZGEwNmYwYzciLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOltdfSwiYXpwIjoiM2NhNzgxZGUtNjI4OC00NmZlLTkzZTAtMjRkZWRhMDZmMGM3Iiwic2NvcGUiOiJleHRlcm5hbF92bmZfbGNtX29wX29jY19ub3RpZmljYXRpb25fc2VuZCB2bmZfbGNtX3dyaXRlIHByb2ZpbGUgdm5mX2xjbV9yZWFkIHZuZl9pbmRfcmVhZCIsImlzcyI6Imh0dHA6XC9cL2lkZW50aXR5LW1hbmFnZW1lbnQtaWRwLnRtZzItY2x1c3Rlci52bmZtLXQyLm1hbm8uZG9jb21vLm5lLmpwIiwidHlwIjoiQmVhcmVyIiwiZXhwIjoxNTc4MzY1NTU1LCJpYXQiOjE1NzgzNjE5NTUsImp0aSI6IjI2NzFlMTEyLWEwZjktNGI2OC1hZDYwLTIwMDg2NTIwNzg4NSIsInRlbmFudC1pZCI6ImRlZmF1bHQifQ.MBPB6XluYhHjfW0tWtoOvryqArWho_5rAZwnAZnLLp6nx2UoaYw8om0_Iyg9U_VuFIThwPvGhH8EqtU7Ep637z3GRxpomja8ozb1ZKV3mo9-iRI8IHEYxGvuG-8aQc1wBm80zH9RT-nD7olHwCREyaQIgbFsekPeFPsO8CQ1QUgGAtB-_hbemSSTnlHvGCFThFLUi9n1T4f8LUwn-zS1_0HBOOrSltvBFHeUw5mPcYh1hcKjHmCYCsmWGkPIYtCYc_Jw8OFtkic_QdYqP4CHTuMvjlk7aAhSQph4KBDiyhRb2gAQrPj47Iix1zk7IcAJVTRBvTRvJIkQgIW2Azvg7w"}
+status : 204
+reason_phrase : No Content
+http_version : 1.1
+body : {}
+request_method : POST
+request_uri : https://dummy-nfvo-ops-Line2.mano.docomo.ne.jp:13202/
+----------------------------------------------------
+[2020-01-07 11:10:07 +0900]  Response Details:
+[2020-01-07 11:10:07 +0900]  Path   : https://dummy-nfvo-ops-Line2.mano.docomo.ne.jp:13202/
+[2020-01-07 11:10:07 +0900]  Header: {
+  "authorization": "eyJraWQiOiJyc2ExIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIzY2E3ODFkZS02Mjg4LTQ2ZmUtOTNlMC0yNGRlZGEwNmYwYzciLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOltdfSwiYXpwIjoiM2NhNzgxZGUtNjI4OC00NmZlLTkzZTAtMjRkZWRhMDZmMGM3Iiwic2NvcGUiOiJleHRlcm5hbF92bmZfbGNtX29wX29jY19ub3RpZmljYXRpb25fc2VuZCB2bmZfbGNtX3dyaXRlIHByb2ZpbGUgdm5mX2xjbV9yZWFkIHZuZl9pbmRfcmVhZCIsImlzcyI6Imh0dHA6XC9cL2lkZW50aXR5LW1hbmFnZW1lbnQtaWRwLnRtZzItY2x1c3Rlci52bmZtLXQyLm1hbm8uZG9jb21vLm5lLmpwIiwidHlwIjoiQmVhcmVyIiwiZXhwIjoxNTc4MzY1NTU1LCJpYXQiOjE1NzgzNjE5NTUsImp0aSI6IjI2NzFlMTEyLWEwZjktNGI2OC1hZDYwLTIwMDg2NTIwNzg4NSIsInRlbmFudC1pZCI6ImRlZmF1bHQifQ.MBPB6XluYhHjfW0tWtoOvryqArWho_5rAZwnAZnLLp6nx2UoaYw8om0_Iyg9U_VuFIThwPvGhH8EqtU7Ep637z3GRxpomja8ozb1ZKV3mo9-iRI8IHEYxGvuG-8aQc1wBm80zH9RT-nD7olHwCREyaQIgbFsekPeFPsO8CQ1QUgGAtB-_hbemSSTnlHvGCFThFLUi9n1T4f8LUwn-zS1_0HBOOrSltvBFHeUw5mPcYh1hcKjHmCYCsmWGkPIYtCYc_Jw8OFtkic_QdYqP4CHTuMvjlk7aAhSQph4KBDiyhRb2gAQrPj47Iix1zk7IcAJVTRBvTRvJIkQgIW2Azvg7w",
+  "www-authenticate": "eyJraWQiOiJyc2ExIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIzY2E3ODFkZS02Mjg4LTQ2ZmUtOTNlMC0yNGRlZGEwNmYwYzciLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOltdfSwiYXpwIjoiM2NhNzgxZGUtNjI4OC00NmZlLTkzZTAtMjRkZWRhMDZmMGM3Iiwic2NvcGUiOiJleHRlcm5hbF92bmZfbGNtX29wX29jY19ub3RpZmljYXRpb25fc2VuZCB2bmZfbGNtX3dyaXRlIHByb2ZpbGUgdm5mX2xjbV9yZWFkIHZuZl9pbmRfcmVhZCIsImlzcyI6Imh0dHA6XC9cL2lkZW50aXR5LW1hbmFnZW1lbnQtaWRwLnRtZzItY2x1c3Rlci52bmZtLXQyLm1hbm8uZG9jb21vLm5lLmpwIiwidHlwIjoiQmVhcmVyIiwiZXhwIjoxNTc4MzY1NTU1LCJpYXQiOjE1NzgzNjE5NTUsImp0aSI6IjI2NzFlMTEyLWEwZjktNGI2OC1hZDYwLTIwMDg2NTIwNzg4NSIsInRlbmFudC1pZCI6ImRlZmF1bHQifQ.MBPB6XluYhHjfW0tWtoOvryqArWho_5rAZwnAZnLLp6nx2UoaYw8om0_Iyg9U_VuFIThwPvGhH8EqtU7Ep637z3GRxpomja8ozb1ZKV3mo9-iRI8IHEYxGvuG-8aQc1wBm80zH9RT-nD7olHwCREyaQIgbFsekPeFPsO8CQ1QUgGAtB-_hbemSSTnlHvGCFThFLUi9n1T4f8LUwn-zS1_0HBOOrSltvBFHeUw5mPcYh1hcKjHmCYCsmWGkPIYtCYc_Jw8OFtkic_QdYqP4CHTuMvjlk7aAhSQph4KBDiyhRb2gAQrPj47Iix1zk7IcAJVTRBvTRvJIkQgIW2Azvg7w"
+}
+[2020-01-07 11:10:07 +0900]  Body   : {
+}
+[2020-01-07 11:10:07 +0900]  Status : 204
+[2020-01-07 11:10:07 +0900]  ----------------------------------
