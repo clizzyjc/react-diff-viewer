@@ -447,8 +447,9 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
     var v = new Validator();
 
     var subscriptionSchema = {
+      "additionalProperties": false,
       "id": "/All",
-  
+      
       "type": "object",
   
      "properties": {
