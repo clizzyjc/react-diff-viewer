@@ -151,6 +151,8 @@ const computeLineInformation = (
   disableWordDiff: boolean = false,
   compareMethod: string = DiffMethod.CHARS,
   listoferrors:  { property: string, instance: string}[] ,
+  bodyContents: string,
+  schemaContents: string[]
 ): ComputedLineInformation => {
   const diffArray = diff.diffLines(
     oldString.trimRight(),
@@ -209,19 +211,39 @@ const computeLineInformation = (
               right.lineNumber = lineNumber;
              
               var flag = true
+              var flag1= true;
+              
               listoferrors.forEach(element => {
-                
-                if(rightValue.includes(element.property) && rightValue.includes(element.instance)){
-                  right.type = DiffType.REMOVED
-                  left.type = DiffType.REMOVED
-                  flag = false
-                }
-
-                if(flag == true){
-                  right.type = DiffType.ADDED
-                  left.type = DiffType.ADDED
-                }
+                  
+                  if(rightValue.includes(element.property) && rightValue.includes(element.instance)){
+                    
+                    right.type = DiffType.REMOVED
+                    left.type = DiffType.REMOVED
+                    flag = false
+                  }
+                  else{
+                    schemaContents.forEach(element1 => {
+                      if(flag == true && rightValue.includes("\""+element1+"\"") && bodyContents.includes(rightValue.toString())){
+                        right.type = DiffType.ADDED
+                        left.type = DiffType.ADDED
+                        flag1=false
+                      }
+                      
+                    });
+                  }
+                  
+                  if(flag1 == true){
+                    flag = false
+                    right.type = DiffType.REMOVED
+                    left.type = DiffType.REMOVED
+                  }
               });
+
+              if(!bodyContents.includes(rightValue.toString())){
+                flag = true
+                right.type = DiffType.ADDED
+                left.type = DiffType.ADDED
+              }
               
               // Do word level diff and assign the corresponding values to the
               // left and right diff information object.
@@ -248,8 +270,8 @@ const computeLineInformation = (
                 }
 
                 if(flag == true){
-                 right.type = DiffType.ADDED
-                  left.type = DiffType.ADDED
+                 right.type = DiffType.REMOVED
+                  left.type = DiffType.REMOVED
                 }
               });
         }

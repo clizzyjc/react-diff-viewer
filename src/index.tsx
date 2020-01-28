@@ -2,6 +2,8 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import cn from 'classnames';
 import {Validator} from "jsonschema";
+const generic_schema = require('../examples/generic_schema.rjs').default;
+
 
 import {
   computeLineInformation,
@@ -303,7 +305,6 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
     { left, right }: LineInformation,
     index: number,
   ): JSX.Element => {
-    console.log('left')
     return (
       <tr key={index} className={this.styles.line}>
         {this.renderLine(
@@ -445,95 +446,96 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
   private renderDiff = (): JSX.Element[] => {
     const { oldValue, newValue, splitView, disableWordDiff, compareMethod } = this.props;
     var v = new Validator();
-
+    
     var subscriptionSchema = {
-      "additionalProperties": false,
       "id": "/All",
       
       "type": "object",
   
-     "properties": {
+      "properties": {
   
-      "id": {
+      // "id": {
   
-        "type": "string"
+      //   "type": "string",
+      //   "pattern": "^[a-fA-F0-9]{8}\-[a-fA-F0-9]{4}\-[a-fA-F0-9]{4}\-[a-fA-F0-9]{4}\-[a-fA-F0-9]{12}$"
   
-      },
+      // },
   
-      "notificationType": {
+      // "notificationType": {
   
-        "type": "string"
+      //   "type": "string"
   
-      },
+      // },
   
-      "subscriptionId": {
+      // "subscriptionId": {
   
-        "type": "string",
+      //   "type": "string",
   
-      },
+      // },
   
-      "notificationStatus": {
+      // "notificationStatus": {
   
-        "type": "string",
+      //   "type": "string",
   
-      },
-      "operationState": {
+      // },
+      // "operationState": {
   
-        "type": "string",
+      //   "type": "string",
   
-      },
-      "operation": {
+      // },
+      // "operation": {
   
-        "type": "string",
+      //   "type": "string",
   
-      },
-      "isAutomaticInvocation": {
+      // },
+      // "isAutomaticInvocation": {
+      //   "type":"any"
+      // },
+      // "vnfLcmOpOccId": {
   
-        "type": "boolean",
+      //   "type": "string",
   
-      },
-      "vnfLcmOpOccId": {
+      // },
   
-        "type": "string",
+      // "_links": {
   
-      },
+      //   "type": "object",
   
-      "_links": {
+      //   "properties": {
   
-        "type": "object",
+      //     "vnfInstance": {
   
-        "properties": {
+      //       "type": "object",
+      //       "href": {
+      //         "type": "string"
+      //       }
+      //     },
   
-          "vnfInstance": {
+      //     "subscription": {
   
-            "type": "object",
-            "href": {
-              "type": "string"
-            }
-          },
+      //       "type": "object",
+      //       "href": {
+      //         "type": "string"
+      //       }
+      //     },
+      //     "vnfLcmOpOcc": {
   
-          "subscription": {
+      //       "type": "object",
+      //       "href": {
+      //         "type": "string"
+      //       }
+      //     }
   
-            "type": "object",
-            "href": {
-              "type": "string"
-            }
-          },
-          "vnfLcmOpOcc": {
+      //   }
   
-            "type": "object",
-            "href": {
-              "type": "string"
-            }
-          }
-  
-        }
-  
-      }
-    }
+      // }
+    },
+    required:[
+      "asdasdasdasdsada"
+    ]
   
   };
-      
+
   var content = newValue
   var result = content.substring((content.indexOf("Body  : "))+8,content.indexOf("[2020",content.indexOf("Body  : ")+1)-1);
   var p = JSON.parse(result);
@@ -541,7 +543,7 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
   var apiType = "subscription"
   var x
   if(apiType==="subscription"){
-    x = v.validate(p, subscriptionSchema);
+    x = v.validate(p, JSON.parse(generic_schema));
   }
   
   if(x!=null){
@@ -552,14 +554,21 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
       });
     });
   }
-  
+  listofErrors.push({
+    property :null,
+    instance :null
+  });
 
+  
+  var schemaContent = x.schema.required;
   const { lineInformation, diffLines } = computeLineInformation(
     oldValue,
     newValue,
     disableWordDiff,
     compareMethod,
     listofErrors,
+    result,
+    schemaContent,
   );
 
     const extraLines = this.props.extraLinesSurroundingDiff < 0

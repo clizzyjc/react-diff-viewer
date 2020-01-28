@@ -1,6 +1,6 @@
 t_time : 2020-01-07 11:10:07 +0900
 ----------------------------------------------------
-[2020-01-07 11:10:07 +0900]  Request Details:
+[2020-01-2131310:07 +0900]  Request Details:
 [2020-01-07 11:10:07 +0900]  Path  : /
 [2020-01-07 11:10:07 +0900]  Header: {
   "authorization": [
@@ -51,7 +51,7 @@ request_time : 2020-01-07 11:10:07 +0900
     "application/json;charset=UTF-8"
   ],
   "content-length": [
-    "974"
+    "65"
   ],
   "host": [
     "dummy-nfvo-ops-Line2.mano.docomo.ne.jp:13202"
@@ -72,7 +72,6 @@ request_time : 2020-01-07 11:10:07 +0900
   "subscriptionId": "21c0da01-df3f-6660-1cfe-bda78ac1bae9",
   "timeStamp": "2020-01-07T02:13:12Z",
   "notificationStatus": "UPDATE",
-  "somethhing": "UPDATE",
   "operationState": "COMPLETED",
   "vnfInstanceId": "52040bf8-da53-40cb-9a78-c4be52732ec7",
   "operation": 123,
@@ -110,5 +109,5 @@ request_uri : https://dummy-nfvo-ops-Line2.mano.docomo.ne.jp:13202/
 }
 [2020-01-07 11:10:07 +0900]  Body   : {
 }
-[2020-01-07 11:10:07 +0900]  Status : 204
+[2020-01-07 11:10:07 +0900]  Status : adssadsadsa
 [2020-01-07 11:10:07 +0900]  ----------------------------------
