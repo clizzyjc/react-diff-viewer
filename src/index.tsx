@@ -542,8 +542,20 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
   var listofErrors : { property: string, instance: string}[] = [];
   var apiType = "subscription"
   var x
+  var temp = generic_schema;
+  console.log("witweew",temp)
   if(apiType==="subscription"){
-    x = v.validate(p, JSON.parse(generic_schema));
+    x = v.validate(p, JSON.parse(`{
+      "id": "/All",
+      
+      "type": "object",
+    
+      "properties": {
+        },
+      "required": [
+        "asdasdasdasdsada"
+      ]
+    }`));
   }
   
   if(x!=null){
