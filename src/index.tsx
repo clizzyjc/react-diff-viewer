@@ -454,98 +454,98 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
   
       "properties": {
   
-      // "id": {
+      "id": {
   
-      //   "type": "string",
-      //   "pattern": "^[a-fA-F0-9]{8}\-[a-fA-F0-9]{4}\-[a-fA-F0-9]{4}\-[a-fA-F0-9]{4}\-[a-fA-F0-9]{12}$"
+        "type": "string",
+        "pattern": "^[a-fA-F0-9]{8}\-[a-fA-F0-9]{4}\-[a-fA-F0-9]{4}\-[a-fA-F0-9]{4}\-[a-fA-F0-9]{12}$"
   
-      // },
+      },
   
-      // "notificationType": {
+      "notificationType": {
   
-      //   "type": "string"
+        "type": "string"
   
-      // },
+      },
   
-      // "subscriptionId": {
+      "subscriptionId": {
   
-      //   "type": "string",
+        "type": "string",
   
-      // },
+      },
   
-      // "notificationStatus": {
+      "notificationStatus": {
   
-      //   "type": "string",
+        "type": "string",
   
-      // },
-      // "operationState": {
+      },
+      "operationState": {
   
-      //   "type": "string",
+        "type": "string",
   
-      // },
-      // "operation": {
+      },
+      "operation": {
   
-      //   "type": "string",
+        "type": "string",
   
-      // },
-      // "isAutomaticInvocation": {
-      //   "type":"any"
-      // },
-      // "vnfLcmOpOccId": {
+      },
+      "isAutomaticInvocation": {
+        "type":"any"
+      },
+      "vnfLcmOpOccId": {
   
-      //   "type": "string",
+        "type": "string",
   
-      // },
+      },
   
-      // "_links": {
+      "_links": {
   
-      //   "type": "object",
+        "type": "object",
   
-      //   "properties": {
+        "properties": {
   
-      //     "vnfInstance": {
+          "vnfInstance": {
   
-      //       "type": "object",
-      //       "href": {
-      //         "type": "string"
-      //       }
-      //     },
+            "type": "object",
+            "href": {
+              "type": "string"
+            }
+          },
   
-      //     "subscription": {
+          "subscription": {
   
-      //       "type": "object",
-      //       "href": {
-      //         "type": "string"
-      //       }
-      //     },
-      //     "vnfLcmOpOcc": {
+            "type": "object",
+            "href": {
+              "type": "string"
+            }
+          },
+          "vnfLcmOpOcc": {
   
-      //       "type": "object",
-      //       "href": {
-      //         "type": "string"
-      //       }
-      //     }
+            "type": "object",
+            "href": {
+              "type": "string"
+            }
+          }
   
-      //   }
+        }
   
-      // }
-    },
-    required:[
-      "asdasdasdasdsada"
-    ]
+      }
+    }
   
   };
   
   var content = newValue
   var result = content.substring((content.indexOf("Body  : "))+8,content.indexOf("[2020",content.indexOf("Body  : ")+1)-1);
+  var headerres = content.substring((content.indexOf("Header: "))+8,content.indexOf("[2020",content.indexOf("Header: ")+1)-1)
+  //console.log("pooper",result)
+  //console.log("paper",headerres)
   var p = JSON.parse(result);
+  //var p = JSON.parse(content)
+  
   var listofErrors : { property: string, instance: string}[] = [];
   var apiType = "subscription"
   var x
-  var temp = generic_schema;
-  console.log("witweew",temp)
   if(apiType==="subscription"){
-    x = v.validate(p, generic_schema);
+    x = v.validate(p, subscriptionSchema);
   }
   
   if(x!=null){
@@ -561,7 +561,11 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
     instance :null
   });
 
-  
+  var tempholder  = ""
+  //var concatenatedStr = newValue
+  console.log("errors",x.errors)
+  var concatenatedStr = tempholder.concat(result,headerres)
+  console.log("idontunderstand",concatenatedStr)
   var schemaContent = x.schema.required;
   const { lineInformation, diffLines } = computeLineInformation(
     oldValue,
@@ -569,7 +573,7 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
     disableWordDiff,
     compareMethod,
     listofErrors,
-    result,
+    concatenatedStr,
     schemaContent,
   );
 

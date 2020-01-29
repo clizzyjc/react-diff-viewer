@@ -222,14 +222,14 @@ const computeLineInformation = (
                     flag = false
                   }
                   else{
-                    schemaContents.forEach(element1 => {
-                      if(flag == true && rightValue.includes("\""+element1+"\"") && bodyContents.includes(rightValue.toString())){
-                        right.type = DiffType.ADDED
-                        left.type = DiffType.ADDED
-                        flag1=false
-                      }
-                      
-                    });
+                    if(schemaContents!=undefined){
+                      schemaContents.forEach(element1 => {
+                        if(element1!=undefined && flag == true && rightValue.includes("\""+element1+"\"") && bodyContents.includes(rightValue.toString())){
+                          right.type = DiffType.ADDED
+                          left.type = DiffType.ADDED
+                          flag1=false
+                        }});
+                    }
                   }
                   
                   if(flag1 == true){
@@ -240,6 +240,7 @@ const computeLineInformation = (
               });
 
               if(!bodyContents.includes(rightValue.toString())){
+                console.log("yesyow",rightValue)
                 flag = true
                 right.type = DiffType.ADDED
                 left.type = DiffType.ADDED

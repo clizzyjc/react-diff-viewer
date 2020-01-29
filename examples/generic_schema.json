@@ -1,9 +1,12 @@
 {
-  "id": "/All",
-  "type": "object",
-  "properties": {
-    },
-  "required": [
-    "asdasdasdasdsada"
-  ]
+	"id": "/All",
+
+	"type": "object",
+	"header": {
+	},
+	"properties": {
+	},
+	"required": [
+		"--------placeholder------"
+	]
 }

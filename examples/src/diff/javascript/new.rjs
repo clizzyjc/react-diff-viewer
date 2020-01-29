@@ -1,48 +1,19 @@
-t_time : 2020-01-07 11:10:07 +0900
-----------------------------------------------------
-[2020-01-2131310:07 +0900]  Request Details:
-[2020-01-07 11:10:07 +0900]  Path  : /
-[2020-01-07 11:10:07 +0900]  Header: {
-  "authorization": [
-  ],
-  "accept": [
-    "application/json, application/*+json"
-  ],
-  "content-type": [
-    "application/json;charset=UTF-8"
-  ],
-  "content-length": [
-    "974"
-  ],
-  "host": [
-    "dummy-nfvo-ops-Line2.mano.docomo.ne.jp:13202"
-  ],
-  "connection": [
-    "Keep-Alive"
-  ],
-  "user-agent": [
-    "Apache-HttpClient/4.5.3 (Java/1.8.0_171)"
-  ],
-  "accept-encoding": [
-    "gzip,deflate"
-  ]
-}
---
+[2020-01-23 16:48:16 +0900]   RAW Request ----------
 request_line : POST / HTTP/1.1
 request_method : POST
 unparsed_uri : /
 http_version : 1.1
 request_uri : https://dummy-nfvo-ops-Line2.mano.docomo.ne.jp:13202/
-raw_header : ["Authorization: Bearer eyJraWQiOiJyc2ExIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI0MmU0M2ZhXpwIjoiNDJlNDNmYTktMzI5Yy00YTE2LWEzZDYtZjU0ZWE4Nzg0MzQ0Iiwic2NvcGUiOiJwcm9maZtLXQxLm1hbm8uZG9jb21vLm5lLmpwIiwidHlwIjoiQmVhcmVyIiwiZXhwIjoxNTYyNjY1OTMwLCsInRlbmFudC1pZCI6ImRlZmF1bHQifQ.JkZD3FpQfSrm8AYU_2F7Q_NnOBS7aVa7kJcg_LsvUxphtUvxZdRkkRkZxt1zM7Lk5lN1wS6qfA02gMpslVnAsl5iQrPTIuxjIVp2zGPhTbyVN4fhd8ZLSW-6FCj7CoW9dMsHDE8gy5vSrfCt_stAefj031-Kienfq2Hb9Mud0bsKM9CwfOvg\r\n", "Accept: application/json, application/*+json\r\n", "Content-Type: application/json;charset=UTF-8\r\n", "Content-Length: 974\r\n", "Host: dummy-nfvo-ops-Line2.mano.docomo.ne.jp:13202\r\n", "Connection: Keep-Alive\r\n", "User-Agent: Apache-HttpClient/4.5.3 (Java/1.8.0_171)\r\n", "Accept-Encoding: gzip,deflate\r\n"]
-header : {"authorization"=>["Bearer eyJraWQiOiJyc2ExIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI0MmU0M2ZhXpwIjoiNDJlNDNmYTktMzI5Yy00YTE2LWEzZDYtZjU0ZWE4Nzg0MzQ0Iiwic2NvcGUiOiJwcm9maZtLXQxLm1hbm8uZG9jb21vLm5lLmpwIiwidHlwIjoiQmVhcmVyIiwiZXhwIjoxNTYyNjY1OTMwLCsInRlbmFudC1pZCI6ImRlZmF1bHQifQ.JkZD3FpQfSrm8AYU_2F7Q_NnOBS7aVa7kJcg_LsvUxphtUvxZdRkkRkZxt1zM7Lk5lN1wS6qfA02gMpslVnAsl5iQrPTIuxjIVp2zGPhTbyVN4fhd8ZLSW-6FCj7CoW9dMsHDE8gy5vSrfCt_stAefj031-Kienfq2Hb9Mud0bsKM9CwfOvg"], "accept"=>["application/json, application/*+json"], "content-type"=>["application/json;charset=UTF-8"], "content-length"=>["974"], "host"=>["dummy-nfvo-ops-Line2.mano.docomo.ne.jp:13202"], "connection"=>["Keep-Alive"], "user-agent"=>["Apache-HttpClient/4.5.3 (Java/1.8.0_171)"], "accept-encoding"=>["gzip,deflate"]}
-body : {"id":"905d2fd2-3d46-9f3e-dee2-9c1c216e33f9","notificationType":"VnfLcmOperationOccurrenceNotification","subscriptionId":"21c0da01-df3f-6660-1cfe-bda78ac1bae9","timeStamp":"2020-01-07T02:13:12Z","notificationStatus":"START","operationState":"PROCESSING","vnfInstanceId":"52040bf8-da53-40cb-9a78-c4be52732ec7","operation":"MODIFY_INFO","isAutomaticInvocation":false,"vnfLcmOpOccId":"1423fb74-b862-4d7b-8349-a41992d5ded5","_links":{"vnfInstance":{"href":"https://vnfm-n-2-nfvo2.mano.docomo.ne.jp/vnfm/0e8a2883-df5d-42aa-9d84-2b02137ef479/sol003_251/vnflcm/v1/vnf_instances/52040bf8-da53-40cb-9a78-c4be52732ec7"},"subscription":{"href":"https://vnfm-n-2-nfvo2.mano.docomo.ne.jp/vnfm/0e8a2883-df5d-42aa-9d84-2b02137ef479/sol003_251/vnflcm/v1/subscriptions/21c0da01-df3f-6660-1cfe-bda78ac1bae9"},"vnfLcmOpOcc":{"href":"https://vnfm-n-2-nfvo2.mano.docomo.ne.jp/vnfm/0e8a2883-df5d-42aa-9d84-2b02137ef479/sol003_251/vnflcm/v1/vnf_lcm_op_occs/1423fb74-b862-4d7b-8349-a41992d5ded5"}}}
-request_time : 2020-01-07 11:10:07 +0900
+raw_header : ["Authorization: Bearer eyJraWQiOiJyc2ExIiwiYWxnIjoiUlMyNTYifTBmNzMyMDdjOTI0OGVhOWQ2NzRkMzdlNGE5NjczODE1\r\n", "Accept: application/json, application/*+json\r\n", "Content-Type: application/json;charset=UTF-8\r\n", "Content-Length: 12157\r\n", "Host: dummy-nfvo-ops-Line2.mano.docomo.ne.jp:13202\r\n", "Connection: Keep-Alive\r\n", "User-Agent: Apache-HttpClient/4.5.3 (Java/1.8.0_171)\r\n", "Accept-Encoding: gzip,deflate\r\n"]
+header : {"authorization"=>["Bearer eyJraWQiOiJyc2ExIiwiYWxnIjoiUlMyNTYifTBmNzMyMDdjOTI0OGVhOWQ2NzRkMzdlNGE5NjczODE1"], "accept"=>["application/json, application/*+json"], "content-type"=>["application/json;charset=UTF-8"], "content-length"=>["12157"], "host"=>["dummy-nfvo-ops-Line2.mano.docomo.ne.jp:13202"], "connection"=>["Keep-Alive"], "user-agent"=>["Apache-HttpClient/4.5.3 (Java/1.8.0_171)"], "accept-encoding"=>["gzip,deflate"]}
+body : {"id":"4c35189b-9f2a-1262-b5eb-171d28d77326","notificationType":"VnfLcmOperationOccurrenceNotification","subscriptionId":"0eb739ba-2562-d1eb-a3da-ad0256c0d258","timeStamp":"2020-01-23T07:51:49Z","notificationStatus":"RESULT","operationState":"COMPLETED","vnfInstanceId":"03b501cd-6a00-45b9-90f3-45888e44a464","operation":"INSTANTIATE","isAutomaticInvocation":false,"vnfLcmOpOccId":"0f74e5c3-ddd0-4343-97da-052566219f39","affectedVnfcs":[{"id":"511db3fc-05c7-42fe-a4d7-c740f0d4943e","vduId":"MME FS 1.0","changeType":"ADDED","computeResource":{"vimConnectionId":"afe942b9-8253-4d1c-9c9f-346a0d73bd99","resourceId":"2088cd17-a707-4027-84f0-daae53000980"},"affectedVnfcCpIds":["4a7aa44d-1fd3-4fae-9dbc-29572d100d69","f7e4f55b-d808-465e-9142-76ed92ebe39f","9a7ddaeb-b23b-4c5c-b74f-5c80c182439d"],"addedStorageResourceIds":["3c571967-bd24-4e06-aa1b-1d24fd661266"]},{"id":"8cb11cd6-8c1b-46f2-92e6-ab7bad2fe9a7","vduId":"MME FS 1.0","changeType":"ADDED","computeResource":{"vimConnectionId":"afe942b9-8253-4d1c-9c9f-346a0d73bd99","resourceId":"4cb850af-6bda-453c-813f-e8ce5c3e3586"},"affectedVnfcCpIds":["019d22aa-6bd3-4592-9ad5-273ba1eeedf7","6f545d96-9706-4dfb-aba2-644a9748e888","9ac0811a-412c-48b2-8630-45411339206f"],"addedStorageResourceIds":["34cac513-fbf2-4081-9598-613260136d77"]},{"id":"fc2caeef-b32d-4aa4-a626-4a005cf6c82d","vduId":"MME MMP 1.0","changeType":"ADDED","computeResource":{"vimConnectionId":"afe942b9-8253-4d1c-9c9f-346a0d73bd99","resourceId":"32e42e1f-8ea5-4fb4-a035-d75af6e82cd8"},"affectedVnfcCpIds":["4e776b7b-5bef-4849-96dd-590ddd48bb5b","644ac534-d599-4d6a-8bd2-f05b74b2b111","9cb4b185-74fc-41f9-9f09-dc5962b104d7"]},{"id":"55bf17fa-da26-45a3-961b-da77080e9b15","vduId":"MME MMP 1.0","changeType":"ADDED","computeResource":{"vimConnectionId":"afe942b9-8253-4d1c-9c9f-346a0d73bd99","resourceId":"bf07179e-40f4-4ec8-bec3-6739163967d0"},"affectedVnfcCpIds":["aa216919-e4cf-47d0-917b-1d26adccdfa3","6309b293-a2a6-4be7-8038-112242076672","f8a9bd2d-5078-4285-8e18-440e8784140a"]},{"id":"55cdc428-d086-43ad-9e48-ea7c74c005f7","vduId":"MME SLB 1.0","changeType":"ADDED","computeResource":{"vimConnectionId":"afe942b9-8253-4d1c-9c9f-346a0d73bd99","resourceId":"05e39245-c65e-4fb5-9f5a-8fb58ea4bfc2"},"affectedVnfcCpIds":["45ea6571-8ce6-4e90-ba4a-b0cf5e5f8bd2","cc4c62a1-9f4b-4463-b737-a2fd77170d48","87aeb397-c6c8-4b7a-ad3e-458bedfb6a6b","6e28d7db-c016-4a12-aab3-c1a18977f356","c9a85595-0814-460e-a741-c09fa7429ac5"]},{"id":"7f7ad01d-c3b9-4cde-b5b7-e0c3b77c7419","vduId":"MME SLB 1.0","changeType":"ADDED","computeResource":{"vimConnectionId":"afe942b9-8253-4d1c-9c9f-346a0d73bd99","resourceId":"c0ad0e61-0345-4c56-b0c9-6979ded6fd43"},"affectedVnfcCpIds":["5ab2fca3-0915-43ef-bbc3-ed65b2f3ceed","2069383c-eb2f-45e3-a43e-85a61602e639","90e18eb4-3ad0-4f76-a362-86f37b798b92","6fdd56f3-20fa-4811-8464-9eac28062ac8","f5e52e2e-4ae1-44c0-be46-a4a7b18102e5"]},{"id":"34a363bb-bc25-44dd-aebc-4159cf707254","vduId":"MME SLB 1.0","changeType":"ADDED","computeResource":{"vimConnectionId":"afe942b9-8253-4d1c-9c9f-346a0d73bd99","resourceId":"569c132d-6fac-4c46-a4ea-bd5cb7e92e64"},"affectedVnfcCpIds":["a2b8c3ae-a7b4-429e-a921-2fed304fc399","bcaf8fda-f132-4e40-9a6b-d3b9ee2b9f5c","7303c126-5117-430e-9549-e7d09e32d23d","4b5ac739-4834-43c7-92f6-bbe23ae5b44f","cea51ed2-ff67-4f7c-8e0c-6cf3b392574b"]},{"id":"046a5579-62a2-495a-8679-22864ef6c28a","vduId":"MME SLB 1.0","changeType":"ADDED","computeResource":{"vimConnectionId":"afe942b9-8253-4d1c-9c9f-346a0d73bd99","resourceId":"eace1ef5-6ca9-4165-914d-bb6db69c21a2"},"affectedVnfcCpIds":["cf606ce8-b90f-4e57-80c6-1f86c086cafa","a738419d-36ed-4be3-afe2-6f17fabdcf17","9eb622de-d3ea-4e57-91b4-e8e14364f67d","3a87a4cf-2ef5-4511-9070-a32754cacd02","d3ddd05f-3cbb-463f-9a78-609366a42780"]},{"id":"78b0ba1e-670b-41ae-8e73-8766ea9b46c4","vduId":"MME SLB 1.0","changeType":"ADDED","computeResource":{"vimConnectionId":"afe942b9-8253-4d1c-9c9f-346a0d73bd99","resourceId":"51033414-d974-46ca-bf5f-3c2ae175a55e"},"affectedVnfcCpIds":["5a31f749-ef96-444e-b11e-30f72095a757","f09fe1e7-ad92-4646-98a0-7133f68f48a9","a8f7cdff-f47d-4669-9e57-1009dfd54390","4d2f0ded-cd2e-441c-afb7-cdeec8f9da70","2ce4dd71-9448-4e00-a291-9c74f28fbba3"]},{"id":"c80966e4-b758-41bc-a6be-3ede05717c55","vduId":"MME SLB 1.0","changeType":"ADDED","computeResource":{"vimConnectionId":"afe942b9-8253-4d1c-9c9f-346a0d73bd99","resourceId":"b18f140f-1333-45c8-add6-61b59102e874"},"affectedVnfcCpIds":["fd463eb3-4c49-4c05-9920-5fb7eb7775eb","8c7712ae-b2b2-4d23-a047-ef05752d348a","50ebe6dc-6dd0-489c-a2a9-4f2b5307f567","afc1df3c-7fec-4028-8af7-0f74fecb1fe5","af79e4c4-0aee-43fd-b8f1-9c44a06a7d9e"]},{"id":"4411a979-2ba5-4188-8af7-810a98efec3f","vduId":"MME SLB 1.0","changeType":"ADDED","computeResource":{"vimConnectionId":"afe942b9-8253-4d1c-9c9f-346a0d73bd99","resourceId":"5a143e61-65ae-4113-b517-463342ecab52"},"affectedVnfcCpIds":["4f6faf0b-1d5b-41b9-af9c-8c20f67ae659","539b8667-81e6-49c5-86a3-aece9debb7cb","7b0033ea-3314-4c02-948a-d647113106f6","18855fa4-8bc3-4e2c-a5b6-6ff5cc6e98b4","ea8ec7cc-99db-4b76-b4f1-0ec7c2a2c0b4"]},{"id":"faaa3050-cb35-4104-a805-3d67299157d3","vduId":"MME SLB 1.0","changeType":"ADDED","computeResource":{"vimConnectionId":"afe942b9-8253-4d1c-9c9f-346a0d73bd99","resourceId":"f9234209-f7f1-48eb-86f4-91d053206924"},"affectedVnfcCpIds":["9c7d8221-21ed-47e1-9ad1-e5d02b5774b4","06ee061c-eebf-4b1a-a4df-7ca94d0f8bf3","c380b988-9aa5-4a4e-bc10-a7567257b91a","a62c032d-1c2f-4726-9b22-13c970f52dc2","d3a5cdce-0966-4ab4-b535-16da023fa24a"]}],"affectedVirtualLinks":[{"id":"e9e5cbde-30d2-4e4b-a0b1-d59d999472ce","virtualLinkDescId":"internal_mme1_1","changeType":"LINK_PORT_ADDED","networkResource":{"vimConnectionId":"afe942b9-8253-4d1c-9c9f-346a0d73bd99","resourceId":"684966fc-6ce3-43ea-8ac9-870e94bfc446"}},{"id":"e9e5cbde-30d2-4e4b-a0b1-d59d999472ce","virtualLinkDescId":"internal_mme1_1","changeType":"ADDED","networkResource":{"vimConnectionId":"afe942b9-8253-4d1c-9c9f-346a0d73bd99","resourceId":"e45f4dfb-13b9-4c86-afcd-ab3a588e149d"}},{"id":"e9e5cbde-30d2-4e4b-a0b1-d59d999472ce","virtualLinkDescId":"internal_mme1_1","changeType":"LINK_PORT_ADDED","networkResource":{"vimConnectionId":"afe942b9-8253-4d1c-9c9f-346a0d73bd99","resourceId":"1c605f53-5d38-43b7-a31d-cc57543b1033"}},{"id":"e9e5cbde-30d2-4e4b-a0b1-d59d999472ce","virtualLinkDescId":"internal_mme1_1","changeType":"LINK_PORT_ADDED","networkResource":{"vimConnectionId":"afe942b9-8253-4d1c-9c9f-346a0d73bd99","resourceId":"a107ffe3-054e-407a-84ef-479765185a97"}},{"id":"e9e5cbde-30d2-4e4b-a0b1-d59d999472ce","virtualLinkDescId":"internal_mme1_1","changeType":"LINK_PORT_ADDED","networkResource":{"vimConnectionId":"afe942b9-8253-4d1c-9c9f-346a0d73bd99","resourceId":"d2907b23-d446-4f98-9003-9d14f3ebbb7d"}},{"id":"e9e5cbde-30d2-4e4b-a0b1-d59d999472ce","virtualLinkDescId":"internal_mme1_1","changeType":"LINK_PORT_ADDED","networkResource":{"vimConnectionId":"afe942b9-8253-4d1c-9c9f-346a0d73bd99","resourceId":"47a0e130-42d9-4cfd-a19e-f85bd49731c1"}},{"id":"e9e5cbde-30d2-4e4b-a0b1-d59d999472ce","virtualLinkDescId":"internal_mme1_1","changeType":"LINK_PORT_ADDED","networkResource":{"vimConnectionId":"afe942b9-8253-4d1c-9c9f-346a0d73bd99","resourceId":"b6d19c54-8cb3-44e1-9553-83312bcafc08"}},{"id":"e9e5cbde-30d2-4e4b-a0b1-d59d999472ce","virtualLinkDescId":"internal_mme1_1","changeType":"LINK_PORT_ADDED","networkResource":{"vimConnectionId":"afe942b9-8253-4d1c-9c9f-346a0d73bd99","resourceId":"01d36fe0-761b-4113-9958-c910df4dabc1"}},{"id":"e9e5cbde-30d2-4e4b-a0b1-d59d999472ce","virtualLinkDescId":"internal_mme1_1","changeType":"LINK_PORT_ADDED","networkResource":{"vimConnectionId":"afe942b9-8253-4d1c-9c9f-346a0d73bd99","resourceId":"337cac11-2c42-4278-8177-8bb0bd580b57"}},{"id":"e9e5cbde-30d2-4e4b-a0b1-d59d999472ce","virtualLinkDescId":"internal_mme1_1","changeType":"LINK_PORT_ADDED","networkResource":{"vimConnectionId":"afe942b9-8253-4d1c-9c9f-346a0d73bd99","resourceId":"40b4022e-e13e-4266-937b-dc094bd5f171"}},{"id":"e9e5cbde-30d2-4e4b-a0b1-d59d999472ce","virtualLinkDescId":"internal_mme1_1","changeType":"LINK_PORT_ADDED","networkResource":{"vimConnectionId":"afe942b9-8253-4d1c-9c9f-346a0d73bd99","resourceId":"f68ac974-98b0-4f5b-8166-462890f426ce"}},{"id":"e9e5cbde-30d2-4e4b-a0b1-d59d999472ce","virtualLinkDescId":"internal_mme1_1","changeType":"LINK_PORT_ADDED","networkResource":{"vimConnectionId":"afe942b9-8253-4d1c-9c9f-346a0d73bd99","resourceId":"e97d5a82-edd9-4b24-9b87-1afd228046c9"}},{"id":"e9e5cbde-30d2-4e4b-a0b1-d59d999472ce","virtualLinkDescId":"internal_mme1_1","changeType":"LINK_PORT_ADDED","networkResource":{"vimConnectionId":"afe942b9-8253-4d1c-9c9f-346a0d73bd99","resourceId":"53b38136-8132-4b87-920c-ca0cdba9a357"}},{"id":"e9e5cbde-30d2-4e4b-a0b1-d59d999472ce","virtualLinkDescId":"internal_mme1_1","changeType":"LINK_PORT_ADDED","networkResource":{"vimConnectionId":"afe942b9-8253-4d1c-9c9f-346a0d73bd99","resourceId":"fa87f070-78b7-48ec-919a-177b0969b5b6"}},{"id":"e9e5cbde-30d2-4e4b-a0b1-d59d999472ce","virtualLinkDescId":"internal_mme1_1","changeType":"LINK_PORT_ADDED","networkResource":{"vimConnectionId":"afe942b9-8253-4d1c-9c9f-346a0d73bd99","resourceId":"294f6daf-2443-4666-adc8-923c7bb884b0"}},{"id":"e9e5cbde-30d2-4e4b-a0b1-d59d999472ce","virtualLinkDescId":"internal_mme1_1","changeType":"LINK_PORT_ADDED","networkResource":{"vimConnectionId":"afe942b9-8253-4d1c-9c9f-346a0d73bd99","resourceId":"e2e2b658-5ec7-490f-aeae-acabda6b5a0b"}},{"id":"e9e5cbde-30d2-4e4b-a0b1-d59d999472ce","virtualLinkDescId":"internal_mme1_1","changeType":"LINK_PORT_ADDED","networkResource":{"vimConnectionId":"afe942b9-8253-4d1c-9c9f-346a0d73bd99","resourceId":"ebc18583-078b-433c-b266-8e8a27251319"}},{"id":"e9e5cbde-30d2-4e4b-a0b1-d59d999472ce","virtualLinkDescId":"internal_mme1_1","changeType":"LINK_PORT_ADDED","networkResource":{"vimConnectionId":"afe942b9-8253-4d1c-9c9f-346a0d73bd99","resourceId":"d26568da-f9dc-4c76-a209-ab5980256757"}},{"id":"e9e5cbde-30d2-4e4b-a0b1-d59d999472ce","virtualLinkDescId":"internal_mme1_1","changeType":"LINK_PORT_ADDED","networkResource":{"vimConnectionId":"afe942b9-8253-4d1c-9c9f-346a0d73bd99","resourceId":"01847507-b056-417a-9601-cfdcf135ec93"}},{"id":"e9e5cbde-30d2-4e4b-a0b1-d59d999472ce","virtualLinkDescId":"internal_mme1_1","changeType":"LINK_PORT_ADDED","networkResource":{"vimConnectionId":"afe942b9-8253-4d1c-9c9f-346a0d73bd99","resourceId":"993f5db6-d88b-4b17-8ee9-8f6dd17f943b"}},{"id":"e9e5cbde-30d2-4e4b-a0b1-d59d999472ce","virtualLinkDescId":"internal_mme1_1","changeType":"LINK_PORT_ADDED","networkResource":{"vimConnectionId":"afe942b9-8253-4d1c-9c9f-346a0d73bd99","resourceId":"b1337dcd-5266-472b-b923-d30b2de202fe"}},{"id":"e9e5cbde-30d2-4e4b-a0b1-d59d999472ce","virtualLinkDescId":"internal_mme1_1","changeType":"LINK_PORT_ADDED","networkResource":{"vimConnectionId":"afe942b9-8253-4d1c-9c9f-346a0d73bd99","resourceId":"0e2a6810-16b4-4a99-a125-8a762b693009"}},{"id":"e9e5cbde-30d2-4e4b-a0b1-d59d999472ce","virtualLinkDescId":"internal_mme1_1","changeType":"LINK_PORT_ADDED","networkResource":{"vimConnectionId":"afe942b9-8253-4d1c-9c9f-346a0d73bd99","resourceId":"711d6cd6-a099-4875-bfc3-71babd42cf81"}}],"affectedVirtualStorages":[{"id":"3c571967-bd24-4e06-aa1b-1d24fd661266","virtualStorageDescId":"sharedStorage","changeType":"ADDED","storageResource":{"vimConnectionId":"afe942b9-8253-4d1c-9c9f-346a0d73bd99","resourceId":"947f914f-7edf-41f4-a017-33eee3aed2a1"}},{"id":"34cac513-fbf2-4081-9598-613260136d77","virtualStorageDescId":"sharedStorage","changeType":"ADDED","storageResource":{"vimConnectionId":"afe942b9-8253-4d1c-9c9f-346a0d73bd99","resourceId":"9fe594e5-865c-463e-8c9f-b615425064e6"}}],"_links":{"vnfInstance":{"href":"https://vnfm-n-2-nfvo2.mano.docomo.ne.jp/vnfm/0e8a2883-df5d-42aa-9d84-2b02137ef479/sol003_251/vnflcm/v1/vnf_instances/03b501cd-6a00-45b9-90f3-45888e44a464"},"subscription":{"href":"https://vnfm-n-2-nfvo2.mano.docomo.ne.jp/vnfm/0e8a2883-df5d-42aa-9d84-2b02137ef479/sol003_251/vnflcm/v1/subscriptions/0eb739ba-2562-d1eb-a3da-ad0256c0d258"},"vnfLcmOpOcc":{"href":"https://vnfm-n-2-nfvo2.mano.docomo.ne.jp/vnfm/0e8a2883-df5d-42aa-9d84-2b02137ef479/sol003_251/vnflcm/v1/vnf_lcm_op_occs/0f74e5c3-ddd0-4343-97da-052566219f39"}}}
+request_time : 2020-01-23 16:48:16 +0900
 ----------------------------------------------------
-[2020-01-07 11:10:07 +0900]  Request Details:
-[2020-01-07 11:10:07 +0900]  Path  : /
-[2020-01-07 11:10:07 +0900]  Header: {
+[2020-01-23 16:48:16 +0900]  Request Details: 
+[2020-01-23 16:48:16 +0900]  Path  : / 
+[2020-01-23 16:48:16 +0900]  Header: {
   "authorization": [
-    "Bearer eyJraWQiOiJyc2ExIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI0MmU0M2ZhXpwIjoiNDJlNDNmYTktMzI5Yy00YTE2LWEzZDYtZjU0ZWE4Nzg0MzQ0Iiwic2NvcGUiOiJwcm9maZtLXQxLm1hbm8uZG9jb21vLm5lLmpwIiwidHlwIjoiQmVhcmVyIiwiZXhwIjoxNTYyNjY1OTMwLCsInRlbmFudC1pZCI6ImRlZmF1bHQifQ.JkZD3FpQfSrm8AYU_2F7Q_NnOBS7aVa7kJcg_LsvUxphtUvxZdRkkRkZxt1zM7Lk5lN1wS6qfA02gMpslVnAsl5iQrPTIuxjIVp2zGPhTbyVN4fhd8ZLSW-6FCj7CoW9dMsHDE8gy5vSrfCt_stAefj031-Kienfq2Hb9Mud0bsKM9CwfOvg"
+    "Bearer eyJraWQiOiJyc2ExIiwiYWxnIjoiUlMyNTYifTBmNzMyMDdjOTI0OGVhOWQ2NzRkMzdlNGE5NjczODE1"
   ],
   "accept": [
     "application/json, application/*+json"
@@ -51,7 +22,7 @@ request_time : 2020-01-07 11:10:07 +0900
     "application/json;charset=UTF-8"
   ],
   "content-length": [
-    "65"
+    "12157"
   ],
   "host": [
     "dummy-nfvo-ops-Line2.mano.docomo.ne.jp:13202"
@@ -65,35 +36,457 @@ request_time : 2020-01-07 11:10:07 +0900
   "accept-encoding": [
     "gzip,deflate"
   ]
-}
-[2020-01-07 11:10:07 +0900]  Body  : {
-  "id": "251c1bd1-3d46-9f3e-dee2-9c1c216e33f9",
+} 
+[2020-01-23 16:48:16 +0900]  Body  : {
+  "id": "4c35189b-9f2a-1262-b5eb-171d28d77326",
   "notificationType": "VnfLcmOperationOccurrenceNotification",
-  "subscriptionId": "21c0da01-df3f-6660-1cfe-bda78ac1bae9",
-  "timeStamp": "2020-01-07T02:13:12Z",
-  "notificationStatus": "UPDATE",
+  "subscriptionId": "0eb739ba-2562-d1eb-a3da-ad0256c0d258",
+  "timeStamp": "2020-01-23T07:51:49Z",
+  "notificationStatus": "RESULT",
   "operationState": "COMPLETED",
-  "vnfInstanceId": "52040bf8-da53-40cb-9a78-c4be52732ec7",
-  "operation": 123,
-  "isAutomaticInvocation": "I am an invalid value",
-  "vnfLcmOpOccId": "1423fb74-b862-4d7b-8349-a41992d5ded5",
+  "vnfInstanceId": "03b501cd-6a00-45b9-90f3-45888e44a464",
+  "operation": "INSTANTIATE",
+  "isAutomaticInvocation": false,
+  "vnfLcmOpOccId": "0f74e5c3-ddd0-4343-97da-052566219f39",
+  "affectedVnfcs": [
+    {
+      "id": "511db3fc-05c7-42fe-a4d7-c740f0d4943e",
+      "vduId": "MME FS 1.0",
+      "changeType": "ADDED",
+      "computeResource": {
+        "vimConnectionId": "afe942b9-8253-4d1c-9c9f-346a0d73bd99",
+        "resourceId": "2088cd17-a707-4027-84f0-daae53000980"
+      },
+      "affectedVnfcCpIds": [
+        "4a7aa44d-1fd3-4fae-9dbc-29572d100d69",
+        "f7e4f55b-d808-465e-9142-76ed92ebe39f",
+        "9a7ddaeb-b23b-4c5c-b74f-5c80c182439d"
+      ],
+      "addedStorageResourceIds": [
+        "3c571967-bd24-4e06-aa1b-1d24fd661266"
+      ]
+    },
+    {
+      "id": "8cb11cd6-8c1b-46f2-92e6-ab7bad2fe9a7",
+      "vduId": "MME FS 1.0",
+      "changeType": "ADDED",
+      "computeResource": {
+        "vimConnectionId": "afe942b9-8253-4d1c-9c9f-346a0d73bd99",
+        "resourceId": "4cb850af-6bda-453c-813f-e8ce5c3e3586"
+      },
+      "affectedVnfcCpIds": [
+        "019d22aa-6bd3-4592-9ad5-273ba1eeedf7",
+        "6f545d96-9706-4dfb-aba2-644a9748e888",
+        "9ac0811a-412c-48b2-8630-45411339206f"
+      ],
+      "addedStorageResourceIds": [
+        "34cac513-fbf2-4081-9598-613260136d77"
+      ]
+    },
+    {
+      "id": "fc2caeef-b32d-4aa4-a626-4a005cf6c82d",
+      "vduId": "MME MMP 1.0",
+      "changeType": "ADDED",
+      "computeResource": {
+        "vimConnectionId": "afe942b9-8253-4d1c-9c9f-346a0d73bd99",
+        "resourceId": "32e42e1f-8ea5-4fb4-a035-d75af6e82cd8"
+      },
+      "affectedVnfcCpIds": [
+        "4e776b7b-5bef-4849-96dd-590ddd48bb5b",
+        "644ac534-d599-4d6a-8bd2-f05b74b2b111",
+        "9cb4b185-74fc-41f9-9f09-dc5962b104d7"
+      ]
+    },
+    {
+      "id": "55bf17fa-da26-45a3-961b-da77080e9b15",
+      "vduId": "MME MMP 1.0",
+      "changeType": "ADDED",
+      "computeResource": {
+        "vimConnectionId": "afe942b9-8253-4d1c-9c9f-346a0d73bd99",
+        "resourceId": "bf07179e-40f4-4ec8-bec3-6739163967d0"
+      },
+      "affectedVnfcCpIds": [
+        "aa216919-e4cf-47d0-917b-1d26adccdfa3",
+        "6309b293-a2a6-4be7-8038-112242076672",
+        "f8a9bd2d-5078-4285-8e18-440e8784140a"
+      ]
+    },
+    {
+      "id": "55cdc428-d086-43ad-9e48-ea7c74c005f7",
+      "vduId": "MME SLB 1.0",
+      "changeType": "ADDED",
+      "computeResource": {
+        "vimConnectionId": "afe942b9-8253-4d1c-9c9f-346a0d73bd99",
+        "resourceId": "05e39245-c65e-4fb5-9f5a-8fb58ea4bfc2"
+      },
+      "affectedVnfcCpIds": [
+        "45ea6571-8ce6-4e90-ba4a-b0cf5e5f8bd2",
+        "cc4c62a1-9f4b-4463-b737-a2fd77170d48",
+        "87aeb397-c6c8-4b7a-ad3e-458bedfb6a6b",
+        "6e28d7db-c016-4a12-aab3-c1a18977f356",
+        "c9a85595-0814-460e-a741-c09fa7429ac5"
+      ]
+    },
+    {
+      "id": "7f7ad01d-c3b9-4cde-b5b7-e0c3b77c7419",
+      "vduId": "MME SLB 1.0",
+      "changeType": "ADDED",
+      "computeResource": {
+        "vimConnectionId": "afe942b9-8253-4d1c-9c9f-346a0d73bd99",
+        "resourceId": "c0ad0e61-0345-4c56-b0c9-6979ded6fd43"
+      },
+      "affectedVnfcCpIds": [
+        "5ab2fca3-0915-43ef-bbc3-ed65b2f3ceed",
+        "2069383c-eb2f-45e3-a43e-85a61602e639",
+        "90e18eb4-3ad0-4f76-a362-86f37b798b92",
+        "6fdd56f3-20fa-4811-8464-9eac28062ac8",
+        "f5e52e2e-4ae1-44c0-be46-a4a7b18102e5"
+      ]
+    },
+    {
+      "id": "34a363bb-bc25-44dd-aebc-4159cf707254",
+      "vduId": "MME SLB 1.0",
+      "changeType": "ADDED",
+      "computeResource": {
+        "vimConnectionId": "afe942b9-8253-4d1c-9c9f-346a0d73bd99",
+        "resourceId": "569c132d-6fac-4c46-a4ea-bd5cb7e92e64"
+      },
+      "affectedVnfcCpIds": [
+        "a2b8c3ae-a7b4-429e-a921-2fed304fc399",
+        "bcaf8fda-f132-4e40-9a6b-d3b9ee2b9f5c",
+        "7303c126-5117-430e-9549-e7d09e32d23d",
+        "4b5ac739-4834-43c7-92f6-bbe23ae5b44f",
+        "cea51ed2-ff67-4f7c-8e0c-6cf3b392574b"
+      ]
+    },
+    {
+      "id": "046a5579-62a2-495a-8679-22864ef6c28a",
+      "vduId": "MME SLB 1.0",
+      "changeType": "ADDED",
+      "computeResource": {
+        "vimConnectionId": "afe942b9-8253-4d1c-9c9f-346a0d73bd99",
+        "resourceId": "eace1ef5-6ca9-4165-914d-bb6db69c21a2"
+      },
+      "affectedVnfcCpIds": [
+        "cf606ce8-b90f-4e57-80c6-1f86c086cafa",
+        "a738419d-36ed-4be3-afe2-6f17fabdcf17",
+        "9eb622de-d3ea-4e57-91b4-e8e14364f67d",
+        "3a87a4cf-2ef5-4511-9070-a32754cacd02",
+        "d3ddd05f-3cbb-463f-9a78-609366a42780"
+      ]
+    },
+    {
+      "id": "78b0ba1e-670b-41ae-8e73-8766ea9b46c4",
+      "vduId": "MME SLB 1.0",
+      "changeType": "ADDED",
+      "computeResource": {
+        "vimConnectionId": "afe942b9-8253-4d1c-9c9f-346a0d73bd99",
+        "resourceId": "51033414-d974-46ca-bf5f-3c2ae175a55e"
+      },
+      "affectedVnfcCpIds": [
+        "5a31f749-ef96-444e-b11e-30f72095a757",
+        "f09fe1e7-ad92-4646-98a0-7133f68f48a9",
+        "a8f7cdff-f47d-4669-9e57-1009dfd54390",
+        "4d2f0ded-cd2e-441c-afb7-cdeec8f9da70",
+        "2ce4dd71-9448-4e00-a291-9c74f28fbba3"
+      ]
+    },
+    {
+      "id": "c80966e4-b758-41bc-a6be-3ede05717c55",
+      "vduId": "MME SLB 1.0",
+      "changeType": "ADDED",
+      "computeResource": {
+        "vimConnectionId": "afe942b9-8253-4d1c-9c9f-346a0d73bd99",
+        "resourceId": "b18f140f-1333-45c8-add6-61b59102e874"
+      },
+      "affectedVnfcCpIds": [
+        "fd463eb3-4c49-4c05-9920-5fb7eb7775eb",
+        "8c7712ae-b2b2-4d23-a047-ef05752d348a",
+        "50ebe6dc-6dd0-489c-a2a9-4f2b5307f567",
+        "afc1df3c-7fec-4028-8af7-0f74fecb1fe5",
+        "af79e4c4-0aee-43fd-b8f1-9c44a06a7d9e"
+      ]
+    },
+    {
+      "id": "4411a979-2ba5-4188-8af7-810a98efec3f",
+      "vduId": "MME SLB 1.0",
+      "changeType": "ADDED",
+      "computeResource": {
+        "vimConnectionId": "afe942b9-8253-4d1c-9c9f-346a0d73bd99",
+        "resourceId": "5a143e61-65ae-4113-b517-463342ecab52"
+      },
+      "affectedVnfcCpIds": [
+        "4f6faf0b-1d5b-41b9-af9c-8c20f67ae659",
+        "539b8667-81e6-49c5-86a3-aece9debb7cb",
+        "7b0033ea-3314-4c02-948a-d647113106f6",
+        "18855fa4-8bc3-4e2c-a5b6-6ff5cc6e98b4",
+        "ea8ec7cc-99db-4b76-b4f1-0ec7c2a2c0b4"
+      ]
+    },
+    {
+      "id": "faaa3050-cb35-4104-a805-3d67299157d3",
+      "vduId": "MME SLB 1.0",
+      "changeType": "ADDED",
+      "computeResource": {
+        "vimConnectionId": "afe942b9-8253-4d1c-9c9f-346a0d73bd99",
+        "resourceId": "f9234209-f7f1-48eb-86f4-91d053206924"
+      },
+      "affectedVnfcCpIds": [
+        "9c7d8221-21ed-47e1-9ad1-e5d02b5774b4",
+        "06ee061c-eebf-4b1a-a4df-7ca94d0f8bf3",
+        "c380b988-9aa5-4a4e-bc10-a7567257b91a",
+        "a62c032d-1c2f-4726-9b22-13c970f52dc2",
+        "d3a5cdce-0966-4ab4-b535-16da023fa24a"
+      ]
+    }
+  ],
+  "affectedVirtualLinks": [
+    {
+      "id": "e9e5cbde-30d2-4e4b-a0b1-d59d999472ce",
+      "virtualLinkDescId": "internal_mme1_1",
+      "changeType": "LINK_PORT_ADDED",
+      "networkResource": {
+        "vimConnectionId": "afe942b9-8253-4d1c-9c9f-346a0d73bd99",
+        "resourceId": "684966fc-6ce3-43ea-8ac9-870e94bfc446"
+      }
+    },
+    {
+      "id": "e9e5cbde-30d2-4e4b-a0b1-d59d999472ce",
+      "virtualLinkDescId": "internal_mme1_1",
+      "changeType": "ADDED",
+      "networkResource": {
+        "vimConnectionId": "afe942b9-8253-4d1c-9c9f-346a0d73bd99",
+        "resourceId": "e45f4dfb-13b9-4c86-afcd-ab3a588e149d"
+      }
+    },
+    {
+      "id": "e9e5cbde-30d2-4e4b-a0b1-d59d999472ce",
+      "virtualLinkDescId": "internal_mme1_1",
+      "changeType": "LINK_PORT_ADDED",
+      "networkResource": {
+        "vimConnectionId": "afe942b9-8253-4d1c-9c9f-346a0d73bd99",
+        "resourceId": "1c605f53-5d38-43b7-a31d-cc57543b1033"
+      }
+    },
+    {
+      "id": "e9e5cbde-30d2-4e4b-a0b1-d59d999472ce",
+      "virtualLinkDescId": "internal_mme1_1",
+      "changeType": "LINK_PORT_ADDED",
+      "networkResource": {
+        "vimConnectionId": "afe942b9-8253-4d1c-9c9f-346a0d73bd99",
+        "resourceId": "a107ffe3-054e-407a-84ef-479765185a97"
+      }
+    },
+    {
+      "id": "e9e5cbde-30d2-4e4b-a0b1-d59d999472ce",
+      "virtualLinkDescId": "internal_mme1_1",
+      "changeType": "LINK_PORT_ADDED",
+      "networkResource": {
+        "vimConnectionId": "afe942b9-8253-4d1c-9c9f-346a0d73bd99",
+        "resourceId": "d2907b23-d446-4f98-9003-9d14f3ebbb7d"
+      }
+    },
+    {
+      "id": "e9e5cbde-30d2-4e4b-a0b1-d59d999472ce",
+      "virtualLinkDescId": "internal_mme1_1",
+      "changeType": "LINK_PORT_ADDED",
+      "networkResource": {
+        "vimConnectionId": "afe942b9-8253-4d1c-9c9f-346a0d73bd99",
+        "resourceId": "47a0e130-42d9-4cfd-a19e-f85bd49731c1"
+      }
+    },
+    {
+      "id": "e9e5cbde-30d2-4e4b-a0b1-d59d999472ce",
+      "virtualLinkDescId": "internal_mme1_1",
+      "changeType": "LINK_PORT_ADDED",
+      "networkResource": {
+        "vimConnectionId": "afe942b9-8253-4d1c-9c9f-346a0d73bd99",
+        "resourceId": "b6d19c54-8cb3-44e1-9553-83312bcafc08"
+      }
+    },
+    {
+      "id": "e9e5cbde-30d2-4e4b-a0b1-d59d999472ce",
+      "virtualLinkDescId": "internal_mme1_1",
+      "changeType": "LINK_PORT_ADDED",
+      "networkResource": {
+        "vimConnectionId": "afe942b9-8253-4d1c-9c9f-346a0d73bd99",
+        "resourceId": "01d36fe0-761b-4113-9958-c910df4dabc1"
+      }
+    },
+    {
+      "id": "e9e5cbde-30d2-4e4b-a0b1-d59d999472ce",
+      "virtualLinkDescId": "internal_mme1_1",
+      "changeType": "LINK_PORT_ADDED",
+      "networkResource": {
+        "vimConnectionId": "afe942b9-8253-4d1c-9c9f-346a0d73bd99",
+        "resourceId": "337cac11-2c42-4278-8177-8bb0bd580b57"
+      }
+    },
+    {
+      "id": "e9e5cbde-30d2-4e4b-a0b1-d59d999472ce",
+      "virtualLinkDescId": "internal_mme1_1",
+      "changeType": "LINK_PORT_ADDED",
+      "networkResource": {
+        "vimConnectionId": "afe942b9-8253-4d1c-9c9f-346a0d73bd99",
+        "resourceId": "40b4022e-e13e-4266-937b-dc094bd5f171"
+      }
+    },
+    {
+      "id": "e9e5cbde-30d2-4e4b-a0b1-d59d999472ce",
+      "virtualLinkDescId": "internal_mme1_1",
+      "changeType": "LINK_PORT_ADDED",
+      "networkResource": {
+        "vimConnectionId": "afe942b9-8253-4d1c-9c9f-346a0d73bd99",
+        "resourceId": "f68ac974-98b0-4f5b-8166-462890f426ce"
+      }
+    },
+    {
+      "id": "e9e5cbde-30d2-4e4b-a0b1-d59d999472ce",
+      "virtualLinkDescId": "internal_mme1_1",
+      "changeType": "LINK_PORT_ADDED",
+      "networkResource": {
+        "vimConnectionId": "afe942b9-8253-4d1c-9c9f-346a0d73bd99",
+        "resourceId": "e97d5a82-edd9-4b24-9b87-1afd228046c9"
+      }
+    },
+    {
+      "id": "e9e5cbde-30d2-4e4b-a0b1-d59d999472ce",
+      "virtualLinkDescId": "internal_mme1_1",
+      "changeType": "LINK_PORT_ADDED",
+      "networkResource": {
+        "vimConnectionId": "afe942b9-8253-4d1c-9c9f-346a0d73bd99",
+        "resourceId": "53b38136-8132-4b87-920c-ca0cdba9a357"
+      }
+    },
+    {
+      "id": "e9e5cbde-30d2-4e4b-a0b1-d59d999472ce",
+      "virtualLinkDescId": "internal_mme1_1",
+      "changeType": "LINK_PORT_ADDED",
+      "networkResource": {
+        "vimConnectionId": "afe942b9-8253-4d1c-9c9f-346a0d73bd99",
+        "resourceId": "fa87f070-78b7-48ec-919a-177b0969b5b6"
+      }
+    },
+    {
+      "id": "e9e5cbde-30d2-4e4b-a0b1-d59d999472ce",
+      "virtualLinkDescId": "internal_mme1_1",
+      "changeType": "LINK_PORT_ADDED",
+      "networkResource": {
+        "vimConnectionId": "afe942b9-8253-4d1c-9c9f-346a0d73bd99",
+        "resourceId": "294f6daf-2443-4666-adc8-923c7bb884b0"
+      }
+    },
+    {
+      "id": "e9e5cbde-30d2-4e4b-a0b1-d59d999472ce",
+      "virtualLinkDescId": "internal_mme1_1",
+      "changeType": "LINK_PORT_ADDED",
+      "networkResource": {
+        "vimConnectionId": "afe942b9-8253-4d1c-9c9f-346a0d73bd99",
+        "resourceId": "e2e2b658-5ec7-490f-aeae-acabda6b5a0b"
+      }
+    },
+    {
+      "id": "e9e5cbde-30d2-4e4b-a0b1-d59d999472ce",
+      "virtualLinkDescId": "internal_mme1_1",
+      "changeType": "LINK_PORT_ADDED",
+      "networkResource": {
+        "vimConnectionId": "afe942b9-8253-4d1c-9c9f-346a0d73bd99",
+        "resourceId": "ebc18583-078b-433c-b266-8e8a27251319"
+      }
+    },
+    {
+      "id": "e9e5cbde-30d2-4e4b-a0b1-d59d999472ce",
+      "virtualLinkDescId": "internal_mme1_1",
+      "changeType": "LINK_PORT_ADDED",
+      "networkResource": {
+        "vimConnectionId": "afe942b9-8253-4d1c-9c9f-346a0d73bd99",
+        "resourceId": "d26568da-f9dc-4c76-a209-ab5980256757"
+      }
+    },
+    {
+      "id": "e9e5cbde-30d2-4e4b-a0b1-d59d999472ce",
+      "virtualLinkDescId": "internal_mme1_1",
+      "changeType": "LINK_PORT_ADDED",
+      "networkResource": {
+        "vimConnectionId": "afe942b9-8253-4d1c-9c9f-346a0d73bd99",
+        "resourceId": "01847507-b056-417a-9601-cfdcf135ec93"
+      }
+    },
+    {
+      "id": "e9e5cbde-30d2-4e4b-a0b1-d59d999472ce",
+      "virtualLinkDescId": "internal_mme1_1",
+      "changeType": "LINK_PORT_ADDED",
+      "networkResource": {
+        "vimConnectionId": "afe942b9-8253-4d1c-9c9f-346a0d73bd99",
+        "resourceId": "993f5db6-d88b-4b17-8ee9-8f6dd17f943b"
+      }
+    },
+    {
+      "id": "e9e5cbde-30d2-4e4b-a0b1-d59d999472ce",
+      "virtualLinkDescId": "internal_mme1_1",
+      "changeType": "LINK_PORT_ADDED",
+      "networkResource": {
+        "vimConnectionId": "afe942b9-8253-4d1c-9c9f-346a0d73bd99",
+        "resourceId": "b1337dcd-5266-472b-b923-d30b2de202fe"
+      }
+    },
+    {
+      "id": "e9e5cbde-30d2-4e4b-a0b1-d59d999472ce",
+      "virtualLinkDescId": "internal_mme1_1",
+      "changeType": "LINK_PORT_ADDED",
+      "networkResource": {
+        "vimConnectionId": "afe942b9-8253-4d1c-9c9f-346a0d73bd99",
+        "resourceId": "0e2a6810-16b4-4a99-a125-8a762b693009"
+      }
+    },
+    {
+      "id": "e9e5cbde-30d2-4e4b-a0b1-d59d999472ce",
+      "virtualLinkDescId": "internal_mme1_1",
+      "changeType": "LINK_PORT_ADDED",
+      "networkResource": {
+        "vimConnectionId": "afe942b9-8253-4d1c-9c9f-346a0d73bd99",
+        "resourceId": "711d6cd6-a099-4875-bfc3-71babd42cf81"
+      }
+    }
+  ],
+  "affectedVirtualStorages": [
+    {
+      "id": "3c571967-bd24-4e06-aa1b-1d24fd661266",
+      "virtualStorageDescId": "sharedStorage",
+      "changeType": "ADDED",
+      "storageResource": {
+        "vimConnectionId": "afe942b9-8253-4d1c-9c9f-346a0d73bd99",
+        "resourceId": "947f914f-7edf-41f4-a017-33eee3aed2a1"
+      }
+    },
+    {
+      "id": "34cac513-fbf2-4081-9598-613260136d77",
+      "virtualStorageDescId": "sharedStorage",
+      "changeType": "ADDED",
+      "storageResource": {
+        "vimConnectionId": "afe942b9-8253-4d1c-9c9f-346a0d73bd99",
+        "resourceId": "9fe594e5-865c-463e-8c9f-b615425064e6"
+      }
+    }
+  ],
   "_links": {
     "vnfInstance": {
-      "href": "https://vnfm-n-2-nfvo2.mano.docomo.ne.jp/vnfm/0e8a2883-df5d-42aa-9d84-2b02137ef479/sol003_251/vnflcm/v1/vnf_instances/52040bf8-da53-40cb-9a78-c4be52732ec7"
+      "href": "https://vnfm-n-2-nfvo2.mano.docomo.ne.jp/vnfm/0e8a2883-df5d-42aa-9d84-2b02137ef479/sol003_251/vnflcm/v1/vnf_instances/03b501cd-6a00-45b9-90f3-45888e44a464",
+      "id": " ddfe 4 b27-ee 13- 4 2 4 e - 8 2d8 - 4 6 6 9f 3 d 892ca "
     },
     "subscription": {
-      "href": "https://vnfm-n-2-nfvo2.mano.docomo.ne.jp/vnfm/0e8a2883-df5d-42aa-9d84-2b02137ef479/sol003_251/vnflcm/v1/subscriptions/21c0da01-df3f-6660-1cfe-bda78ac1bae9"
+      "href": "https://vnfm-n-2-nfvo2.mano.docomo.ne.jp/vnfm/0e8a2883-df5d-42aa-9d84-2b02137ef479/sol003_251/vnflcm/v1/subscriptions/0eb739ba-2562-d1eb-a3da-ad0256c0d258"
     },
     "vnfLcmOpOcc": {
-      "href": "b74-b862-4d7b-8349-a41992d5ded5"
+      "href": "https://vnfm-n-2-nfvo2.mano.docomo.ne.jp/vnfm/0e8a2883-df5d-42aa-9d84-2b02137ef479/sol003_251/vnflcm/v1/vnf_lcm_op_occs/0f74e5c3-ddd0-4343-97da-052566219f39"
     }
   }
-}
-[2020-01-07 11:10:07 +0900]
-[2020-01-07 11:10:07 +0900]  JSON config to load: /root/NFVO_OPS_Sim_Multi/conf/json-config/notification/modify_info/nfvo_notification_post_config.json
-[2020-01-07 11:10:07 +0900]
-[2020-01-07 11:10:07 +0900]   RAW Response ----------
-header : {"authorization"=>"eyJraWQiOiJyc2ExIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIzY2E3ODFkZS02Mjg4LTQ2ZmUtOTNlMC0yNGRlZGEwNmYwYzciLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOltdfSwiYXpwIjoiM2NhNzgxZGUtNjI4OC00NmZlLTkzZTAtMjRkZWRhMDZmMGM3Iiwic2NvcGUiOiJleHRlcm5hbF92bmZfbGNtX29wX29jY19ub3RpZmljYXRpb25fc2VuZCB2bmZfbGNtX3dyaXRlIHByb2ZpbGUgdm5mX2xjbV9yZWFkIHZuZl9pbmRfcmVhZCIsImlzcyI6Imh0dHA6XC9cL2lkZW50aXR5LW1hbmFnZW1lbnQtaWRwLnRtZzItY2x1c3Rlci52bmZtLXQyLm1hbm8uZG9jb21vLm5lLmpwIiwidHlwIjoiQmVhcmVyIiwiZXhwIjoxNTc4MzY1NTU1LCJpYXQiOjE1NzgzNjE5NTUsImp0aSI6IjI2NzFlMTEyLWEwZjktNGI2OC1hZDYwLTIwMDg2NTIwNzg4NSIsInRlbmFudC1pZCI6ImRlZmF1bHQifQ.MBPB6XluYhHjfW0tWtoOvryqArWho_5rAZwnAZnLLp6nx2UoaYw8om0_Iyg9U_VuFIThwPvGhH8EqtU7Ep637z3GRxpomja8ozb1ZKV3mo9-iRI8IHEYxGvuG-8aQc1wBm80zH9RT-nD7olHwCREyaQIgbFsekPeFPsO8CQ1QUgGAtB-_hbemSSTnlHvGCFThFLUi9n1T4f8LUwn-zS1_0HBOOrSltvBFHeUw5mPcYh1hcKjHmCYCsmWGkPIYtCYc_Jw8OFtkic_QdYqP4CHTuMvjlk7aAhSQph4KBDiyhRb2gAQrPj47Iix1zk7IcAJVTRBvTRvJIkQgIW2Azvg7w", "www-authenticate"=>"eyJraWQiOiJyc2ExIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIzY2E3ODFkZS02Mjg4LTQ2ZmUtOTNlMC0yNGRlZGEwNmYwYzciLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOltdfSwiYXpwIjoiM2NhNzgxZGUtNjI4OC00NmZlLTkzZTAtMjRkZWRhMDZmMGM3Iiwic2NvcGUiOiJleHRlcm5hbF92bmZfbGNtX29wX29jY19ub3RpZmljYXRpb25fc2VuZCB2bmZfbGNtX3dyaXRlIHByb2ZpbGUgdm5mX2xjbV9yZWFkIHZuZl9pbmRfcmVhZCIsImlzcyI6Imh0dHA6XC9cL2lkZW50aXR5LW1hbmFnZW1lbnQtaWRwLnRtZzItY2x1c3Rlci52bmZtLXQyLm1hbm8uZG9jb21vLm5lLmpwIiwidHlwIjoiQmVhcmVyIiwiZXhwIjoxNTc4MzY1NTU1LCJpYXQiOjE1NzgzNjE5NTUsImp0aSI6IjI2NzFlMTEyLWEwZjktNGI2OC1hZDYwLTIwMDg2NTIwNzg4NSIsInRlbmFudC1pZCI6ImRlZmF1bHQifQ.MBPB6XluYhHjfW0tWtoOvryqArWho_5rAZwnAZnLLp6nx2UoaYw8om0_Iyg9U_VuFIThwPvGhH8EqtU7Ep637z3GRxpomja8ozb1ZKV3mo9-iRI8IHEYxGvuG-8aQc1wBm80zH9RT-nD7olHwCREyaQIgbFsekPeFPsO8CQ1QUgGAtB-_hbemSSTnlHvGCFThFLUi9n1T4f8LUwn-zS1_0HBOOrSltvBFHeUw5mPcYh1hcKjHmCYCsmWGkPIYtCYc_Jw8OFtkic_QdYqP4CHTuMvjlk7aAhSQph4KBDiyhRb2gAQrPj47Iix1zk7IcAJVTRBvTRvJIkQgIW2Azvg7w"}
+} 
+[2020-01-23 16:48:16 +0900]  
+[2020-01-23 16:48:16 +0900]  JSON config to load: /root/NFVO_OPS_Sim_Multi/conf/json-config/notification/instantiate/nfvo_notification_post_config.json
+[2020-01-23 16:48:16 +0900]  
+[2020-01-23 16:48:16 +0900]   RAW Response ----------
+header : {"authorization"=>"eyJraWQiOiJyc2ExIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIzY2E3ODFkZS02Mjg4LTQ2ZmUtOTNlMC0yNGRlZGEwNmYwYzciLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOltdfSwiYXpwIjoiM2NhNzgxZGUtNjI4OC00NmZlLTkzZTAtMjRkZWRhMDZmMGM3Iiwic2NvcGUiOiJleHRlcm5hbF92bmZfbGNtX29wX29jY19ub3RpZmljYXRpb25fc2VuZCB2bmZfbGNtX3dyaXRlIHByb2ZpbGUgdm5mX2xjbV9yZWFkIHZuZl9pbmRfcmVhZCIsImlzcyI6Imh0dHA6XC9cL2lkZW50aXR5LW1hbmFnZW1lbnQtaWRwLnRtZzItY2x1c3Rlci52bmZtLXQyLm1hbm8uZG9jb21vLm5lLmpwIiwidHlwIjoiQmVhcmVyIiwiZXhwIjoxNTc5NzY4MTEwLCJpYXQiOjE1Nzk3NjQ1MTAsImp0aSI6IjI3YTdmOTdkLWJhNjUtNDQ3My04Njc3LTEyYTlkNDIzMGNjMCIsInRlbmFudC1pZCI6ImRlZmF1bHQifQ.a8rTK5Vzb0y_DeiyiqXpzOHSSd-3qaqRnDaKsMYqSq6mDJr222ZckJ_Jb6EvuAl1z0C9sw7zQUtq-AY2M0m_cfFOpBPw1KwrqwnJTC0s84JV-wLQXa2sgcNvi00zxzJIAwJlnKpMedd4Sm3KiLMtFJ8ll2ZCBEP0BhUAlhpjaI4FCDin8H8rBrAQgZHNqJpkc-lkVD3DazJZa8LDoMlTlQfFDwPrQpB0jXgp-3dPuDtOdop9zQYDJyhRTcFSA0ildTy7htz4XbmN1-AQ2SbEia8fya0fpBPv_IzhIqj0V7qURTZ_OtJyEBwPCIKgMiW2BTN76P59lJEyInfq3JTqBg", "www-authenticate"=>"Bearer (access_token value from MANO)"}
 status : 204
 reason_phrase : No Content
 http_version : 1.1
@@ -101,13 +494,13 @@ body : {}
 request_method : POST
 request_uri : https://dummy-nfvo-ops-Line2.mano.docomo.ne.jp:13202/
 ----------------------------------------------------
-[2020-01-07 11:10:07 +0900]  Response Details:
-[2020-01-07 11:10:07 +0900]  Path   : https://dummy-nfvo-ops-Line2.mano.docomo.ne.jp:13202/
-[2020-01-07 11:10:07 +0900]  Header: {
-  "authorization": "eyJraWQiOiJyc2ExIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIzY2E3ODFkZS02Mjg4LTQ2ZmUtOTNlMC0yNGRlZGEwNmYwYzciLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOltdfSwiYXpwIjoiM2NhNzgxZGUtNjI4OC00NmZlLTkzZTAtMjRkZWRhMDZmMGM3Iiwic2NvcGUiOiJleHRlcm5hbF92bmZfbGNtX29wX29jY19ub3RpZmljYXRpb25fc2VuZCB2bmZfbGNtX3dyaXRlIHByb2ZpbGUgdm5mX2xjbV9yZWFkIHZuZl9pbmRfcmVhZCIsImlzcyI6Imh0dHA6XC9cL2lkZW50aXR5LW1hbmFnZW1lbnQtaWRwLnRtZzItY2x1c3Rlci52bmZtLXQyLm1hbm8uZG9jb21vLm5lLmpwIiwidHlwIjoiQmVhcmVyIiwiZXhwIjoxNTc4MzY1NTU1LCJpYXQiOjE1NzgzNjE5NTUsImp0aSI6IjI2NzFlMTEyLWEwZjktNGI2OC1hZDYwLTIwMDg2NTIwNzg4NSIsInRlbmFudC1pZCI6ImRlZmF1bHQifQ.MBPB6XluYhHjfW0tWtoOvryqArWho_5rAZwnAZnLLp6nx2UoaYw8om0_Iyg9U_VuFIThwPvGhH8EqtU7Ep637z3GRxpomja8ozb1ZKV3mo9-iRI8IHEYxGvuG-8aQc1wBm80zH9RT-nD7olHwCREyaQIgbFsekPeFPsO8CQ1QUgGAtB-_hbemSSTnlHvGCFThFLUi9n1T4f8LUwn-zS1_0HBOOrSltvBFHeUw5mPcYh1hcKjHmCYCsmWGkPIYtCYc_Jw8OFtkic_QdYqP4CHTuMvjlk7aAhSQph4KBDiyhRb2gAQrPj47Iix1zk7IcAJVTRBvTRvJIkQgIW2Azvg7w",
-  "www-authenticate": "eyJraWQiOiJyc2ExIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIzY2E3ODFkZS02Mjg4LTQ2ZmUtOTNlMC0yNGRlZGEwNmYwYzciLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOltdfSwiYXpwIjoiM2NhNzgxZGUtNjI4OC00NmZlLTkzZTAtMjRkZWRhMDZmMGM3Iiwic2NvcGUiOiJleHRlcm5hbF92bmZfbGNtX29wX29jY19ub3RpZmljYXRpb25fc2VuZCB2bmZfbGNtX3dyaXRlIHByb2ZpbGUgdm5mX2xjbV9yZWFkIHZuZl9pbmRfcmVhZCIsImlzcyI6Imh0dHA6XC9cL2lkZW50aXR5LW1hbmFnZW1lbnQtaWRwLnRtZzItY2x1c3Rlci52bmZtLXQyLm1hbm8uZG9jb21vLm5lLmpwIiwidHlwIjoiQmVhcmVyIiwiZXhwIjoxNTc4MzY1NTU1LCJpYXQiOjE1NzgzNjE5NTUsImp0aSI6IjI2NzFlMTEyLWEwZjktNGI2OC1hZDYwLTIwMDg2NTIwNzg4NSIsInRlbmFudC1pZCI6ImRlZmF1bHQifQ.MBPB6XluYhHjfW0tWtoOvryqArWho_5rAZwnAZnLLp6nx2UoaYw8om0_Iyg9U_VuFIThwPvGhH8EqtU7Ep637z3GRxpomja8ozb1ZKV3mo9-iRI8IHEYxGvuG-8aQc1wBm80zH9RT-nD7olHwCREyaQIgbFsekPeFPsO8CQ1QUgGAtB-_hbemSSTnlHvGCFThFLUi9n1T4f8LUwn-zS1_0HBOOrSltvBFHeUw5mPcYh1hcKjHmCYCsmWGkPIYtCYc_Jw8OFtkic_QdYqP4CHTuMvjlk7aAhSQph4KBDiyhRb2gAQrPj47Iix1zk7IcAJVTRBvTRvJIkQgIW2Azvg7w"
+[2020-01-23 16:48:16 +0900]  Response Details: 
+[2020-01-23 16:48:16 +0900]  Path   : https://dummy-nfvo-ops-Line2.mano.docomo.ne.jp:13202/ 
+[2020-01-23 16:48:16 +0900]  Header: {
+  "authorization": "eyJraWQiOiJyc2ExIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIzY2E3ODFkZS02Mjg4LTQ2ZmUtOTNlMC0yNGRlZGEwNmYwYzciLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOltdfSwiYXpwIjoiM2NhNzgxZGUtNjI4OC00NmZlLTkzZTAtMjRkZWRhMDZmMGM3Iiwic2NvcGUiOiJleHRlcm5hbF92bmZfbGNtX29wX29jY19ub3RpZmljYXRpb25fc2VuZCB2bmZfbGNtX3dyaXRlIHByb2ZpbGUgdm5mX2xjbV9yZWFkIHZuZl9pbmRfcmVhZCIsImlzcyI6Imh0dHA6XC9cL2lkZW50aXR5LW1hbmFnZW1lbnQtaWRwLnRtZzItY2x1c3Rlci52bmZtLXQyLm1hbm8uZG9jb21vLm5lLmpwIiwidHlwIjoiQmVhcmVyIiwiZXhwIjoxNTc5NzY4MTEwLCJpYXQiOjE1Nzk3NjQ1MTAsImp0aSI6IjI3YTdmOTdkLWJhNjUtNDQ3My04Njc3LTEyYTlkNDIzMGNjMCIsInRlbmFudC1pZCI6ImRlZmF1bHQifQ.a8rTK5Vzb0y_DeiyiqXpzOHSSd-3qaqRnDaKsMYqSq6mDJr222ZckJ_Jb6EvuAl1z0C9sw7zQUtq-AY2M0m_cfFOpBPw1KwrqwnJTC0s84JV-wLQXa2sgcNvi00zxzJIAwJlnKpMedd4Sm3KiLMtFJ8ll2ZCBEP0BhUAlhpjaI4FCDin8H8rBrAQgZHNqJpkc-lkVD3DazJZa8LDoMlTlQfFDwPrQpB0jXgp-3dPuDtOdop9zQYDJyhRTcFSA0ildTy7htz4XbmN1-AQ2SbEia8fya0fpBPv_IzhIqj0V7qURTZ_OtJyEBwPCIKgMiW2BTN76P59lJEyInfq3JTqBg",
+  "www-authenticate": "Bearer (access_token value from MANO)"
+} 
+[2020-01-23 16:48:16 +0900]  Body   : {
 }
-[2020-01-07 11:10:07 +0900]  Body   : {
-}
-[2020-01-07 11:10:07 +0900]  Status : adssadsadsa
-[2020-01-07 11:10:07 +0900]  ----------------------------------
+[2020-01-23 16:48:16 +0900]  Status : 204
+[2020-01-23 16:48:16 +0900]  ----------------------------------
