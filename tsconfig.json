@@ -8,6 +8,8 @@
     "target": "esnext",
     "declaration": true,
     "downlevelIteration": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": false,
     "lib": ["es2017", "dom"],
     "types": [
       "mocha",

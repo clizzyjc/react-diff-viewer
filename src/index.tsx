@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import cn from 'classnames';
 import {Validator} from "jsonschema";
-const generic_schema = require('../examples/generic_schema.rjs').default;
+const  generic_schema = require("../examples/generic_schema.json");
 
 
 import {
@@ -535,7 +535,7 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
     ]
   
   };
-
+  
   var content = newValue
   var result = content.substring((content.indexOf("Body  : "))+8,content.indexOf("[2020",content.indexOf("Body  : ")+1)-1);
   var p = JSON.parse(result);
@@ -543,7 +543,7 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
   var apiType = "subscription"
   var x
   if(apiType==="subscription"){
-    x = v.validate(p, JSON.parse(generic_schema));
+    x = v.validate(p, generic_schema);
   }
   
   if(x!=null){
