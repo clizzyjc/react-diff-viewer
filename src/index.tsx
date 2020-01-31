@@ -3,7 +3,9 @@ import * as PropTypes from 'prop-types';
 import cn from 'classnames';
 import {Validator} from "jsonschema";
 const  generic_schema = require("../examples/generic_schema.json");
-
+const  generic_schema_1 = require("../examples/generic_schema_1.json");
+const  createVNF_schema = require("../examples/createVNF_schema_request.json");
+const  createVNF_schema_1 = require("../examples/createVNF_schema_response.json");
 
 import {
   computeLineInformation,
@@ -447,126 +449,86 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
     const { oldValue, newValue, splitView, disableWordDiff, compareMethod } = this.props;
     var v = new Validator();
     
-    var subscriptionSchema = {
-      "id": "/All",
-      
-      "type": "object",
-  
-      "properties": {
-  
-      "id": {
-  
-        "type": "string",
-        "pattern": "^[a-fA-F0-9]{8}\-[a-fA-F0-9]{4}\-[a-fA-F0-9]{4}\-[a-fA-F0-9]{4}\-[a-fA-F0-9]{12}$"
-  
-      },
-  
-      "notificationType": {
-  
-        "type": "string"
-  
-      },
-  
-      "subscriptionId": {
-  
-        "type": "string",
-  
-      },
-  
-      "notificationStatus": {
-  
-        "type": "string",
-  
-      },
-      "operationState": {
-  
-        "type": "string",
-  
-      },
-      "operation": {
-  
-        "type": "string",
-  
-      },
-      "isAutomaticInvocation": {
-        "type":"any"
-      },
-      "vnfLcmOpOccId": {
-  
-        "type": "string",
-  
-      },
-  
-      "_links": {
-  
-        "type": "object",
-  
-        "properties": {
-  
-          "vnfInstance": {
-  
-            "type": "object",
-            "href": {
-              "type": "string"
-            }
-          },
-  
-          "subscription": {
-  
-            "type": "object",
-            "href": {
-              "type": "string"
-            }
-          },
-          "vnfLcmOpOcc": {
-  
-            "type": "object",
-            "href": {
-              "type": "string"
-            }
-          }
-  
-        }
-  
-      }
+  var content = newValue;
+  var occurrence = content.match(/Body  \:/g).length;
+  var body_pattern_to_find = "Body  :";
+  var header_pattern_to_find = "Header: ";
+  var result = [];
+  var headerres = [];
+  for(var i = 0; i < occurrence; i ++) {
+    var body_index = content.indexOf("{",content.indexOf(body_pattern_to_find)+1);
+    var next_timestamp_index = content.indexOf("[2020",content.indexOf(body_pattern_to_find)+1)
+    if(next_timestamp_index < body_index || body_index < 0) {
+      result[i] = null;
+    } 
+    else {
+      result[i] = content.substring(body_index,content.indexOf("[2020",content.indexOf(body_pattern_to_find)+1)-1);
     }
-  
-  };
-  
-  var content = newValue
-  var result = content.substring((content.indexOf("Body  : "))+8,content.indexOf("[2020",content.indexOf("Body  : ")+1)-1);
-  var headerres = content.substring((content.indexOf("Header: "))+8,content.indexOf("[2020",content.indexOf("Header: ")+1)-1)
+    var header_index = content.indexOf("{",content.indexOf(header_pattern_to_find)+1)
+    headerres[i] = content.substring(header_index,content.indexOf("[2020",content.indexOf(header_pattern_to_find)+1)-1)
+    content = content.replace(content.substring(body_index - 10,content.indexOf("[2020",content.indexOf(body_pattern_to_find)+1)),"");
+    content = content.replace(content.substring(header_index - 10,content.indexOf("[2020",content.indexOf(header_pattern_to_find)+1)),"");
+  }
   //console.log("pooper",result)
   //console.log("paper",headerres)
-  var p = JSON.parse(result);
+  var x = null
+  var listofErrors : { property: string, instance: string,parent_and_property: string}[] = [];
+
+  var schemaContent=["xp;[fvbscplaceholderasdasaa"];
+  var counter = 0
+  result.forEach(element => {
+    if(null !== element) {
+      var p = JSON.parse(element);
+    
+      if(counter==0){
+        x = v.validate(p, createVNF_schema);
+        counter++
+      }
+      else{
+        x = v.validate(p, createVNF_schema_1);
+      }
+      console.log("errors",x.errors)
+      schemaContent = schemaContent.concat(x.schema.required) 
+      if(x!=null){
+        x.errors.forEach(element => {
+
+          if(element.argument==null){
+            listofErrors.push({
+            property :element.property.substring(element.property.lastIndexOf(".")+1,element.property.length-1),
+            instance :element.instance,
+            //parent_and_property: element.property.replace("instance.","")
+            parent_and_property: "-=xzcadaaplaceholder/*-+-*/"
+          });
+          }
+          else{
+            listofErrors.push({
+              property :element.property.substring(element.property.lastIndexOf(".")+1,element.property.length-1),
+              instance :element.instance,
+              //parent_and_property: element.property.replace("instance.","")
+              parent_and_property: element.argument
+            });
+          }
+        });
+        }
+    }
+  });
+ 
+  // var result = content.substring((content.indexOf("Body  : "))+8,content.indexOf("[2020",content.indexOf("Body  : ")+1)-1);
+  // var headerres = content.substring((content.indexOf("Header: "))+8,content.indexOf("[2020",content.indexOf("Header: ")+1)-1)
+  // //console.log("pooper",result)
+  // //console.log("paper",headerres)
+  // var p = JSON.parse(result);
   //var p = JSON.parse(content)
   
-  var listofErrors : { property: string, instance: string}[] = [];
-  var apiType = "subscription"
-  var x
-  if(apiType==="subscription"){
-    x = v.validate(p, subscriptionSchema);
-  }
+  // var apiType = "subscription"
   
-  if(x!=null){
-    x.errors.forEach(element => {
-      listofErrors.push({
-        property :element.property.replace("instance.",""),
-        instance :element.instance
-      });
-    });
-  }
-  listofErrors.push({
-    property :null,
-    instance :null
-  });
-
-  var tempholder  = ""
+  // if(apiType==="subscription"){
+  //   x = v.validate(p, subscriptionSchema);
+  // }
+  
+  var tempReq  = ""
   //var concatenatedStr = newValue
-  console.log("errors",x.errors)
-  var concatenatedStr = tempholder.concat(result,headerres)
-  console.log("idontunderstand",concatenatedStr)
-  var schemaContent = x.schema.required;
+  var concatenatedStr = tempReq.concat(result[0],headerres[0],result[1],headerres[1])
   const { lineInformation, diffLines } = computeLineInformation(
     oldValue,
     newValue,

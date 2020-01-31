@@ -150,7 +150,7 @@ const computeLineInformation = (
   newString: string,
   disableWordDiff: boolean = false,
   compareMethod: string = DiffMethod.CHARS,
-  listoferrors:  { property: string, instance: string}[] ,
+  listoferrors:  { property: string, instance: string,parent_and_property: string}[] ,
   bodyContents: string,
   schemaContents: string[]
 ): ComputedLineInformation => {
@@ -211,24 +211,32 @@ const computeLineInformation = (
               right.lineNumber = lineNumber;
              
               var flag = true
-              var flag1= true;
-              
+              var flag1= true; 
               listoferrors.forEach(element => {
-                  
                   if(rightValue.includes(element.property) && rightValue.includes(element.instance)){
-                    
                     right.type = DiffType.REMOVED
                     left.type = DiffType.REMOVED
                     flag = false
                   }
                   else{
                     if(schemaContents!=undefined){
+                      var tempString = element.parent_and_property.toString()
+                      var temp = tempString.substring(tempString.lastIndexOf(".")+1,tempString.length)
+                      
                       schemaContents.forEach(element1 => {
-                        if(element1!=undefined && flag == true && rightValue.includes("\""+element1+"\"") && bodyContents.includes(rightValue.toString())){
+                        if((element1!=undefined && flag == true && rightValue.includes("\""+element1+"\"") && bodyContents.includes(rightValue.toString()))){
                           right.type = DiffType.ADDED
                           left.type = DiffType.ADDED
                           flag1=false
-                        }});
+                        }
+                        // else if(element1!=undefined && element.parent_and_property.includes(element1) && bodyContents.includes(rightValue.toString()) && rightValue.includes("\""+temp+"\"") ){
+                        //   console.log("paapy _links","wowowowowow")
+                        //   right.type = DiffType.ADDED
+                        //   left.type = DiffType.ADDED
+                        //   flag1=false
+                        //   flag=true
+                        // }
+                      });
                     }
                   }
                   
@@ -240,7 +248,7 @@ const computeLineInformation = (
               });
 
               if(!bodyContents.includes(rightValue.toString())){
-                console.log("yesyow",rightValue)
+                
                 flag = true
                 right.type = DiffType.ADDED
                 left.type = DiffType.ADDED
@@ -275,6 +283,12 @@ const computeLineInformation = (
                   left.type = DiffType.REMOVED
                 }
               });
+
+              if(!bodyContents.includes(right.value.toString())){
+                flag = true
+                right.type = DiffType.ADDED
+                left.type = DiffType.ADDED
+              }
         }
       } else {
         leftLineNumber += 1;

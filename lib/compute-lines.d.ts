@@ -50,5 +50,6 @@ export interface JsDiffChangeObject {
 declare const computeLineInformation: (oldString: string, newString: string, disableWordDiff: boolean, compareMethod: string, listoferrors: {
     property: string;
     instance: string;
+    parent_and_property: string;
 }[], bodyContents: string, schemaContents: string[]) => ComputedLineInformation;
 export { computeLineInformation };
