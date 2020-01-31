@@ -7,6 +7,8 @@ export declare enum LineNumberPrefix {
     RIGHT = "R"
 }
 export interface ReactDiffViewerProps {
+    schemaRequest: string;
+    schemaResponse: string;
     oldValue: string;
     newValue: string;
     splitView?: boolean;
@@ -31,6 +33,8 @@ declare class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiff
     private styles;
     static defaultProps: ReactDiffViewerProps;
     static propTypes: {
+        schemaRequest: PropTypes.Validator<string>;
+        schemaResponse: PropTypes.Validator<string>;
         oldValue: PropTypes.Validator<string>;
         newValue: PropTypes.Validator<string>;
         splitView: PropTypes.Requireable<boolean>;

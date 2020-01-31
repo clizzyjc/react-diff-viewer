@@ -2,10 +2,6 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import cn from 'classnames';
 import {Validator} from "jsonschema";
-const  generic_schema = require("../examples/generic_schema.json");
-const  generic_schema_1 = require("../examples/generic_schema_1.json");
-const  createVNF_schema = require("../examples/createVNF_schema_request.json");
-const  createVNF_schema_1 = require("../examples/createVNF_schema_response.json");
 
 import {
   computeLineInformation,
@@ -27,6 +23,8 @@ export enum LineNumberPrefix {
 }
 
 export interface ReactDiffViewerProps {
+  schemaRequest: string,
+  schemaResponse: string,
   // Old value to compare.
   oldValue: string;
   // New value to compare.
@@ -77,6 +75,8 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
   private styles: ReactDiffViewerStyles;
 
   public static defaultProps: ReactDiffViewerProps = {
+    schemaRequest: '',
+    schemaResponse: '',
     oldValue: '',
     newValue: '',
     splitView: true,
@@ -91,6 +91,8 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
   };
 
   public static propTypes = {
+    schemaRequest: PropTypes.string.isRequired,
+    schemaResponse: PropTypes.string.isRequired,
     oldValue: PropTypes.string.isRequired,
     newValue: PropTypes.string.isRequired,
     splitView: PropTypes.bool,
@@ -115,7 +117,6 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
 
   public constructor(props: ReactDiffViewerProps) {
     super(props);
-
     this.state = {
       expandedBlocks: [],
     };
@@ -446,7 +447,7 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
    * Generates the entire diff view.
    */
   private renderDiff = (): JSX.Element[] => {
-    const { oldValue, newValue, splitView, disableWordDiff, compareMethod } = this.props;
+    const { oldValue, newValue, splitView, disableWordDiff, compareMethod, schemaRequest, schemaResponse } = this.props;
     var v = new Validator();
     
   var content = newValue;
@@ -469,8 +470,6 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
     content = content.replace(content.substring(body_index - 10,content.indexOf("[2020",content.indexOf(body_pattern_to_find)+1)),"");
     content = content.replace(content.substring(header_index - 10,content.indexOf("[2020",content.indexOf(header_pattern_to_find)+1)),"");
   }
-  //console.log("pooper",result)
-  //console.log("paper",headerres)
   var x = null
   var listofErrors : { property: string, instance: string,parent_and_property: string}[] = [];
 
@@ -481,13 +480,12 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
       var p = JSON.parse(element);
     
       if(counter==0){
-        x = v.validate(p, createVNF_schema);
+        x = v.validate(p, JSON.parse(schemaRequest));
         counter++
       }
       else{
-        x = v.validate(p, createVNF_schema_1);
+        x = v.validate(p, JSON.parse(schemaResponse));
       }
-      console.log("errors",x.errors)
       schemaContent = schemaContent.concat(x.schema.required) 
       if(x!=null){
         x.errors.forEach(element => {
@@ -496,7 +494,6 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
             listofErrors.push({
             property :element.property.substring(element.property.lastIndexOf(".")+1,element.property.length-1),
             instance :element.instance,
-            //parent_and_property: element.property.replace("instance.","")
             parent_and_property: "-=xzcadaaplaceholder/*-+-*/"
           });
           }
@@ -504,7 +501,6 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
             listofErrors.push({
               property :element.property.substring(element.property.lastIndexOf(".")+1,element.property.length-1),
               instance :element.instance,
-              //parent_and_property: element.property.replace("instance.","")
               parent_and_property: element.argument
             });
           }
@@ -512,22 +508,9 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
         }
     }
   });
- 
-  // var result = content.substring((content.indexOf("Body  : "))+8,content.indexOf("[2020",content.indexOf("Body  : ")+1)-1);
-  // var headerres = content.substring((content.indexOf("Header: "))+8,content.indexOf("[2020",content.indexOf("Header: ")+1)-1)
-  // //console.log("pooper",result)
-  // //console.log("paper",headerres)
-  // var p = JSON.parse(result);
-  //var p = JSON.parse(content)
-  
-  // var apiType = "subscription"
-  
-  // if(apiType==="subscription"){
-  //   x = v.validate(p, subscriptionSchema);
-  // }
   
   var tempReq  = ""
-  //var concatenatedStr = newValue
+
   var concatenatedStr = tempReq.concat(result[0],headerres[0],result[1],headerres[1])
   const { lineInformation, diffLines } = computeLineInformation(
     oldValue,
@@ -547,30 +530,6 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
       (line: LineInformation, i: number): JSX.Element => {
         const diffBlockStart = diffLines[0];
         const currentPosition = diffBlockStart - i;
-        // if (this.props.showDiffOnly) {
-        //   if (currentPosition === -extraLines) {
-        //     skippedLines = [];
-        //     diffLines.shift();
-        //   }
-        //   if (
-        //     line.left.type === DiffType.DEFAULT
-        //     && (currentPosition > extraLines
-        //       || typeof diffBlockStart === 'undefined')
-        //     && !this.state.expandedBlocks.includes(diffBlockStart)
-        //   ) {
-        //     skippedLines.push(i + 1);
-        //     if (i === lineInformation.length - 1 && skippedLines.length > 1) {
-        //       return this.renderSkippedLineIndicator(
-        //         skippedLines.length,
-        //         diffBlockStart,
-        //         line.left.lineNumber,
-        //         line.right.lineNumber,
-        //       );
-        //     }
-        //     return null;
-        //   }
-        // }
-
         const diffNodes = splitView
           ? this.renderSplitView(line, i)
           : this.renderInlineView(line, i);
@@ -597,6 +556,8 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
 
   public render = (): JSX.Element => {
     const {
+      schemaRequest,
+      schemaResponse,
       oldValue,
       newValue,
       useDarkTheme,
