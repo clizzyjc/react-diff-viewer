@@ -51,5 +51,6 @@ declare const computeLineInformation: (oldString: string, newString: string, dis
     property: string;
     instance: string;
     parent_and_property: string;
-}[], bodyContents: string, schemaContents: string[]) => ComputedLineInformation;
+    enums: [];
+}[], bodyContents: string, schemaContents: string[], headerContents: string) => ComputedLineInformation;
 export { computeLineInformation };

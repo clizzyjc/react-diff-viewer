@@ -455,7 +455,7 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
   var body_pattern_to_find = "Body  :";
   var header_pattern_to_find = "Header: ";
   var result = [];
-  var headerres = [];
+  var headerres:string[] = [];
   for(var i = 0; i < occurrence; i ++) {
     var body_index = content.indexOf("{",content.indexOf(body_pattern_to_find)+1);
     var next_timestamp_index = content.indexOf("[2020",content.indexOf(body_pattern_to_find)+1)
@@ -470,8 +470,8 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
     content = content.replace(content.substring(body_index - 10,content.indexOf("[2020",content.indexOf(body_pattern_to_find)+1)),"");
     content = content.replace(content.substring(header_index - 10,content.indexOf("[2020",content.indexOf(header_pattern_to_find)+1)),"");
   }
-  var x = null
-  var listofErrors : { property: string, instance: string,parent_and_property: string}[] = [];
+  var ValidationResult = null
+  var listofErrors : { property: string, instance: string,parent_and_property: string, enums:[]}[] = [];
 
   var schemaContent=["xp;[fvbscplaceholderasdasaa"];
   var counter = 0
@@ -480,38 +480,49 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
       var p = JSON.parse(element);
     
       if(counter==0){
-        x = v.validate(p, JSON.parse(schemaRequest));
+        var tempConcatVar ="{"
+        var temporaryBodyStringHolder = tempConcatVar.concat("\"header\":",headerres[counter],",\"body\":",JSON.stringify(p),"}")
+        var ParsedJsonHeaderandBody = JSON.parse(temporaryBodyStringHolder)
+        ValidationResult = v.validate(ParsedJsonHeaderandBody, JSON.parse(schemaResponse));
         counter++
       }
       else{
-        x = v.validate(p, JSON.parse(schemaResponse));
+        var tempConcatVar ="{"
+        var temporaryBodyStringHolder = tempConcatVar.concat("\"header\":",headerres[counter],",\"body\":",JSON.stringify(p),"}")
+        var ParsedJsonHeaderandBody = JSON.parse(temporaryBodyStringHolder)
+        ValidationResult = v.validate(ParsedJsonHeaderandBody, JSON.parse(schemaResponse));
       }
-      schemaContent = schemaContent.concat(x.schema.required) 
-      if(x!=null){
-        x.errors.forEach(element => {
+      schemaContent = schemaContent.concat(ValidationResult.schema.required) 
+      if(ValidationResult!=null){
+        ValidationResult.errors.forEach(element => {
 
           if(element.argument==null){
             listofErrors.push({
-            property :element.property.substring(element.property.lastIndexOf(".")+1,element.property.length-1),
+            property :element.property.substring(element.property.lastIndexOf(".")+1,element.property.length),
             instance :element.instance,
-            parent_and_property: "-=xzcadaaplaceholder/*-+-*/"
+            parent_and_property: "-=xzcadaaplaceholder/*-+-*/",
+            enums: element.argument
           });
           }
           else{
             listofErrors.push({
-              property :element.property.substring(element.property.lastIndexOf(".")+1,element.property.length-1),
+              property :element.property.substring(element.property.lastIndexOf(".")+1,element.property.length),
               instance :element.instance,
-              parent_and_property: element.argument
+              parent_and_property: element.argument,
+              enums: element.argument
             });
           }
         });
         }
+        console.log("errors",ValidationResult.errors)
+        
     }
   });
-  
+  console.log("listoferrors",listofErrors)
   var tempReq  = ""
-
+  var tempHed = ""
   var concatenatedStr = tempReq.concat(result[0],headerres[0],result[1],headerres[1])
+  var concatenatedHeader = tempHed.concat(headerres[0],headerres[1])
   const { lineInformation, diffLines } = computeLineInformation(
     oldValue,
     newValue,
@@ -520,6 +531,7 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
     listofErrors,
     concatenatedStr,
     schemaContent,
+    concatenatedHeader,
   );
 
     const extraLines = this.props.extraLinesSurroundingDiff < 0

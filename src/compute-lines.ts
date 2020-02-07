@@ -1,4 +1,5 @@
 import * as diff from 'diff';
+import { element } from 'prop-types';
 
 const jsDiff: { [key: string]: any } = diff;
 
@@ -150,9 +151,10 @@ const computeLineInformation = (
   newString: string,
   disableWordDiff: boolean = false,
   compareMethod: string = DiffMethod.CHARS,
-  listoferrors:  { property: string, instance: string,parent_and_property: string}[] ,
+  listoferrors:  { property: string, instance: string,parent_and_property: string,enums:[]}[] ,
   bodyContents: string,
-  schemaContents: string[]
+  schemaContents: string[],
+  headerContents: string,
 ): ComputedLineInformation => {
   const diffArray = diff.diffLines(
     oldString.trimRight(),
@@ -209,11 +211,21 @@ const computeLineInformation = (
               } = getLineInformation(nextDiff.value, diffIndex, true, false, true)[0].right;
               ignoreDiffIndexes.push(`${diffIndex + 1}-${lineIndex}`);
               right.lineNumber = lineNumber;
-             
+              
               var flag = true
               var flag1= true; 
               listoferrors.forEach(element => {
-                  if(rightValue.includes(element.property) && rightValue.includes(element.instance)){
+                  var inEnum = false
+                  var i;
+                  for (i = 0; i < element.enums.length; i++) {
+                    //console.log(element.enums, "---x---" , element.enums[i])
+                    if(rightValue.includes(element.enums[i]) && element.enums[i]>1){
+                      inEnum = true
+                    }
+                  }
+                  //console.log(rightValue,"and",localStorage.getItem('temp')," includes ", element.instance ,"and",element.property)
+                  //|| (rightValue.includes(element.property) && inEnum) || (rightValue.includes(element.property) && localStorage.getItem('temp').includes(element.instance))  
+                  if((rightValue.includes(element.property) && rightValue.includes(element.instance)) || (rightValue.includes(element.instance) && localStorage.getItem('temp').includes(element.property)) ){
                     right.type = DiffType.REMOVED
                     left.type = DiffType.REMOVED
                     flag = false
@@ -225,6 +237,11 @@ const computeLineInformation = (
                       
                       schemaContents.forEach(element1 => {
                         if((element1!=undefined && flag == true && rightValue.includes("\""+element1+"\"") && bodyContents.includes(rightValue.toString()))){
+                          right.type = DiffType.ADDED
+                          left.type = DiffType.ADDED
+                          flag1=false
+                        }
+                        else if(element1!=undefined && flag == true && headerContents.includes(localStorage.getItem('temp')) && headerContents.includes(rightValue.toString())  && (localStorage.getItem('temp').includes("\""+element1+"\"") && !rightValue.includes(element.instance))){
                           right.type = DiffType.ADDED
                           left.type = DiffType.ADDED
                           flag1=false
@@ -293,7 +310,7 @@ const computeLineInformation = (
       } else {
         leftLineNumber += 1;
         rightLineNumber += 1;
-
+        localStorage.setItem('temp',lines[lines.length-1]);
         left.lineNumber = leftLineNumber;
         left.type = DiffType.DEFAULT;
         left.value = line;
