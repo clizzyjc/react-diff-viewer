@@ -459,36 +459,36 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
   for(var i = 0; i < occurrence; i ++) {
     var body_index = content.indexOf("{",content.indexOf(body_pattern_to_find)+1);
     var next_timestamp_index = content.indexOf("[2020",content.indexOf(body_pattern_to_find)+1)
-    if(next_timestamp_index < body_index || body_index < 0) {
-      result[i] = null;
+    if(next_timestamp_index < body_index) {
+      result[i] = "{}";
     } 
+    else if(body_index < 0) {
+      result[i] = null;
+    }
     else {
       result[i] = content.substring(body_index,content.indexOf("[2020",content.indexOf(body_pattern_to_find)+1)-1);
     }
     var header_index = content.indexOf("{",content.indexOf(header_pattern_to_find)+1)
     headerres[i] = content.substring(header_index,content.indexOf("[2020",content.indexOf(header_pattern_to_find)+1)-1)
-    content = content.replace(content.substring(body_index - 10,content.indexOf("[2020",content.indexOf(body_pattern_to_find)+1)),"");
-    content = content.replace(content.substring(header_index - 10,content.indexOf("[2020",content.indexOf(header_pattern_to_find)+1)),"");
+    content = content.replace(content.substring(content.indexOf(body_pattern_to_find) - 10,content.indexOf("[2020",content.indexOf(body_pattern_to_find)+1)),"");
+    content = content.replace(content.substring(content.indexOf(header_pattern_to_find) - 10,content.indexOf("[2020",content.indexOf(header_pattern_to_find)+1)),"");
   }
   var ValidationResult = null
   var listofErrors : { property: string, instance: string,parent_and_property: string, enums:[]}[] = [];
-
   var schemaContent=["xp;[fvbscplaceholderasdasaa"];
   var counter = 0
   result.forEach(element => {
     if(null !== element) {
-      var p = JSON.parse(element);
-    
       if(counter==0){
         var tempConcatVar ="{"
-        var temporaryBodyStringHolder = tempConcatVar.concat("\"header\":",headerres[counter],",\"body\":",JSON.stringify(p),"}")
+        var temporaryBodyStringHolder = tempConcatVar.concat("\"header\":",headerres[counter],",\"body\":",JSON.stringify(element),"}")
         var ParsedJsonHeaderandBody = JSON.parse(temporaryBodyStringHolder)
         ValidationResult = v.validate(ParsedJsonHeaderandBody, JSON.parse(schemaResponse));
         counter++
       }
       else{
         var tempConcatVar ="{"
-        var temporaryBodyStringHolder = tempConcatVar.concat("\"header\":",headerres[counter],",\"body\":",JSON.stringify(p),"}")
+        var temporaryBodyStringHolder = tempConcatVar.concat("\"header\":",headerres[counter],",\"body\":",JSON.stringify(element),"}")
         var ParsedJsonHeaderandBody = JSON.parse(temporaryBodyStringHolder)
         ValidationResult = v.validate(ParsedJsonHeaderandBody, JSON.parse(schemaResponse));
       }
@@ -514,11 +514,8 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
           }
         });
         }
-        console.log("errors",ValidationResult.errors)
-        
     }
   });
-  console.log("listoferrors",listofErrors)
   var tempReq  = ""
   var tempHed = ""
   var concatenatedStr = tempReq.concat(result[0],headerres[0],result[1],headerres[1])
