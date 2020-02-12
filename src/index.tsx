@@ -483,7 +483,7 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
         var tempConcatVar ="{"
         var temporaryBodyStringHolder = tempConcatVar.concat("\"header\":",headerres[counter],",\"body\":",JSON.stringify(element),"}")
         var ParsedJsonHeaderandBody = JSON.parse(temporaryBodyStringHolder)
-        ValidationResult = v.validate(ParsedJsonHeaderandBody, JSON.parse(schemaResponse));
+        ValidationResult = v.validate(ParsedJsonHeaderandBody, JSON.parse(schemaRequest));
         counter++
       }
       else{
@@ -513,7 +513,7 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
             });
           }
         });
-        }
+      }
     }
   });
   var tempReq  = ""
