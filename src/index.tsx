@@ -481,17 +481,20 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
     if(null !== element) {
       if(counter==0){
         var tempConcatVar ="{"
-        var temporaryBodyStringHolder = tempConcatVar.concat("\"header\":",headerres[counter],",\"body\":",JSON.stringify(element),"}")
+        var temporaryBodyStringHolder = tempConcatVar.concat("\"header\":",headerres[counter],",\"body\":",element,"}")
         var ParsedJsonHeaderandBody = JSON.parse(temporaryBodyStringHolder)
         ValidationResult = v.validate(ParsedJsonHeaderandBody, JSON.parse(schemaRequest));
+        console.log("ParsedJsonHeaderandBody",ParsedJsonHeaderandBody)
         counter++
       }
       else{
         var tempConcatVar ="{"
-        var temporaryBodyStringHolder = tempConcatVar.concat("\"header\":",headerres[counter],",\"body\":",JSON.stringify(element),"}")
+        var temporaryBodyStringHolder = tempConcatVar.concat("\"header\":",headerres[counter],",\"body\":",element,"}")
         var ParsedJsonHeaderandBody = JSON.parse(temporaryBodyStringHolder)
         ValidationResult = v.validate(ParsedJsonHeaderandBody, JSON.parse(schemaResponse));
+        console.log("ParsedJsonHeaderandBody",ParsedJsonHeaderandBody)
       }
+      
       schemaContent = schemaContent.concat(ValidationResult.schema.required) 
       if(ValidationResult!=null){
         ValidationResult.errors.forEach(element => {
@@ -516,6 +519,7 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
       }
     }
   });
+  console.log("listofErrors", listofErrors)
   var tempReq  = ""
   var tempHed = ""
   var concatenatedStr = tempReq.concat(result[0],headerres[0],result[1],headerres[1])
