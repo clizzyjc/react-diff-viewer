@@ -498,10 +498,11 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
       schemaContent = schemaContent.concat(ValidationResult.schema.required) 
       if(ValidationResult!=null){
         ValidationResult.errors.forEach(element => {
-
+          var temp = element.property.substring(element.property.lastIndexOf(".")+1,element.property.length)
+          temp = temp.includes("[") ? temp.substring(0,temp.indexOf("[")) : temp ;
           if(element.argument==null){
             listofErrors.push({
-            property :element.property.substring(element.property.lastIndexOf(".")+1,element.property.length),
+            property :temp,
             instance :element.instance,
             parent_and_property: "-=xzcadaaplaceholder/*-+-*/",
             enums: element.argument
@@ -509,7 +510,7 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
           }
           else{
             listofErrors.push({
-              property :element.property.substring(element.property.lastIndexOf(".")+1,element.property.length),
+              property :temp,
               instance :element.instance,
               parent_and_property: element.argument,
               enums: element.argument
