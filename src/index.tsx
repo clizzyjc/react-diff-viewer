@@ -452,26 +452,40 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
     
   var content = newValue;
   var occurrence = content.match(/Body  \:/g).length;
-  var body_pattern_to_find = "Body  :";
-  var header_pattern_to_find = "Header: ";
+  const body_pattern_to_find = "Body  :";
+  const body_pattern_to_find_v2 = "Body   :";
+  const header_pattern_to_find = "Header: ";
+  var flag = false
   var result = [];
   var headerres:string[] = [];
+  const regex = /\[\d{4}/g;
+  const yearDatePattern = content.match(regex)[0];
   for(var i = 0; i < occurrence; i ++) {
     var body_index = content.indexOf("{",content.indexOf(body_pattern_to_find)+1);
-    var next_timestamp_index = content.indexOf("[2020",content.indexOf(body_pattern_to_find)+1)
+    var next_timestamp_index = content.indexOf(yearDatePattern,content.indexOf(body_pattern_to_find)+1)
     if(next_timestamp_index < body_index) {
       result[i] = "{}";
+      flag = true
     } 
     else if(body_index < 0) {
       result[i] = null;
+      flag = true
     }
     else {
-      result[i] = content.substring(body_index,content.indexOf("[2020",content.indexOf(body_pattern_to_find)+1)-1);
+      result[i] = content.substring(body_index,content.indexOf(yearDatePattern,content.indexOf(body_pattern_to_find)+1)-1);
     }
     var header_index = content.indexOf("{",content.indexOf(header_pattern_to_find)+1)
-    headerres[i] = content.substring(header_index,content.indexOf("[2020",content.indexOf(header_pattern_to_find)+1)-1)
-    content = content.replace(content.substring(content.indexOf(body_pattern_to_find) - 10,content.indexOf("[2020",content.indexOf(body_pattern_to_find)+1)),"");
-    content = content.replace(content.substring(content.indexOf(header_pattern_to_find) - 10,content.indexOf("[2020",content.indexOf(header_pattern_to_find)+1)),"");
+    headerres[i] = content.substring(header_index,content.indexOf(yearDatePattern,content.indexOf(header_pattern_to_find)+1)-1)
+    content = content.replace(content.substring(content.indexOf(body_pattern_to_find) - 10,content.indexOf(yearDatePattern,content.indexOf(body_pattern_to_find)+1)),"");
+    content = content.replace(content.substring(content.indexOf(header_pattern_to_find) - 10,content.indexOf(yearDatePattern,content.indexOf(header_pattern_to_find)+1)),"");
+    if(occurrence === 1 && !flag) {
+      var body_index2 = content.indexOf("{",content.indexOf(body_pattern_to_find_v2)+1);
+      result[1] = content.substring(body_index2,content.indexOf(yearDatePattern,content.indexOf(body_pattern_to_find_v2)+1)-1);
+      var header_index = content.indexOf("{",content.indexOf(header_pattern_to_find)+1)
+      headerres[1] = content.substring(header_index,content.indexOf(yearDatePattern,content.indexOf(header_pattern_to_find)+1)-1)
+      content = content.replace(content.substring(content.indexOf(body_pattern_to_find_v2) - 10,content.indexOf(yearDatePattern,content.indexOf(body_pattern_to_find_v2)+1)),"");
+      content = content.replace(content.substring(content.indexOf(header_pattern_to_find) - 10,content.indexOf(yearDatePattern,content.indexOf(header_pattern_to_find)+1)),"");
+    }
   }
   var ValidationResult = null
   var listofErrors : { property: string, instance: string,parent_and_property: string, enums:[]}[] = [];
@@ -484,7 +498,7 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
         var temporaryBodyStringHolder = tempConcatVar.concat("\"header\":",headerres[counter],",\"body\":",element,"}")
         var ParsedJsonHeaderandBody = JSON.parse(temporaryBodyStringHolder)
         ValidationResult = v.validate(ParsedJsonHeaderandBody, JSON.parse(schemaRequest));
-        console.log("ParsedJsonHeaderandBody",ParsedJsonHeaderandBody)
+        console.log("ParsedJsonHeaderandBody_request",ParsedJsonHeaderandBody)
         counter++
       }
       else{
@@ -492,7 +506,7 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
         var temporaryBodyStringHolder = tempConcatVar.concat("\"header\":",headerres[counter],",\"body\":",element,"}")
         var ParsedJsonHeaderandBody = JSON.parse(temporaryBodyStringHolder)
         ValidationResult = v.validate(ParsedJsonHeaderandBody, JSON.parse(schemaResponse));
-        console.log("ParsedJsonHeaderandBody",ParsedJsonHeaderandBody)
+        console.log("ParsedJsonHeaderandBody_response",ParsedJsonHeaderandBody)
       }
       
       schemaContent = schemaContent.concat(ValidationResult.schema.required) 
