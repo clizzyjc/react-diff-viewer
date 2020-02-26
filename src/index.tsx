@@ -462,14 +462,14 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
   const yearDatePattern = content.match(regex)[0];
   for(var i = 0; i < occurrence; i ++) {
     var body_index = content.indexOf("{",content.indexOf(body_pattern_to_find)+1);
+    console.log("index of { in body is ", body_index)
     var next_timestamp_index = content.indexOf(yearDatePattern,content.indexOf(body_pattern_to_find)+1)
     if(next_timestamp_index < body_index) {
       result[i] = "{}";
       flag = true
     } 
     else if(body_index < 0) {
-      result[i] = null;
-      flag = true
+      result[i] = "{}";
     }
     else {
       result[i] = content.substring(body_index,content.indexOf(yearDatePattern,content.indexOf(body_pattern_to_find)+1)-1);
