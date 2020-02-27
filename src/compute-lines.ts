@@ -246,6 +246,11 @@ const computeLineInformation = (
                           left.type = DiffType.ADDED
                           flag1=false
                         }
+                        else if(element1!=undefined && flag == true && bodyContents.includes(localStorage.getItem('temp')) && bodyContents.includes(rightValue.toString())  && (localStorage.getItem('temp').includes("\""+element1+"\"") && !rightValue.includes(element.instance))){
+                          right.type = DiffType.ADDED
+                          left.type = DiffType.ADDED
+                          flag1=false
+                        }
                         // else if(element1!=undefined && element.parent_and_property.includes(element1) && bodyContents.includes(rightValue.toString()) && rightValue.includes("\""+temp+"\"") ){
                         //   console.log("paapy _links","wowowowowow")
                         //   right.type = DiffType.ADDED
