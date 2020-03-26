@@ -1,3 +1,4 @@
+import 'diff-match-patch-line-and-word';
 export declare enum DiffType {
     DEFAULT = 0,
     ADDED = 1,

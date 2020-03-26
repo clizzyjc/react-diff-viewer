@@ -29,9 +29,12 @@
 		"test:watch": "mocha --require ts-node/register --require enzyme.ts --watch-extensions ts,tsx --watch ./test/**"
 	},
 	"dependencies": {
+		"@types/diff-match-patch": "^1.0.32",
 		"classnames": "^2.2.6",
 		"create-emotion": "^10.0.14",
 		"diff": "^4.0.1",
+		"diff-match-patch": "^1.0.4",
+		"diff-match-patch-line-and-word": "^0.1.2",
 		"emotion": "^10.0.14",
 		"jsonschema": "^1.2.5",
 		"memoize-one": "^5.0.4",
