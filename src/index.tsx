@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import cn from 'classnames';
 import {Validator} from "jsonschema";
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 import {
   computeLineInformation,
@@ -68,7 +69,12 @@ export interface ReactDiffViewerProps {
 
 export interface ReactDiffViewerState {
   // Array holding the expanded code folding.
-  expandedBlocks?: number[];
+  expandedBlocks?: number[],
+  prev: number,
+  next: number,
+  hasMore: boolean,
+  current : JSX.Element[],
+  data: JSX.Element[],
 }
 
 class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerState> {
@@ -117,8 +123,17 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
 
   public constructor(props: ReactDiffViewerProps) {
     super(props);
+    this.styles = this.computeStyles(this.props.styles, false);
+    let data = this.renderDiff().filter((val) => {
+      return val != null;
+    });
     this.state = {
       expandedBlocks: [],
+      prev: 0,
+      next: 300,
+      hasMore: true,
+      data: data,
+      current :data.slice(0,300)
     };
   }
 
@@ -136,6 +151,25 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
     return false;
   }
 
+  public getMoreData = () => {
+    if (this.state.current.length === this.state.data.length) {
+      this.setState({hasMore:false});
+      return;
+    }
+    setTimeout(() => {
+        this.setState({
+          current:this.state.current.concat(this.state.data.slice(this.state.prev, this.state.next))
+        })
+    //   setCurrent(current.concat(this.state..slice(count.prev + 10, count.next + 10)))
+    }, 100)
+  
+    this.setState(prevState => ({
+        prev: prevState.prev + 300,
+        next: prevState.next + 300
+      }));
+    // this.setState({prev: prev +10, next: next +10})
+    // setCount((prevState) => ({ prev: prevState.prev + 10, next: prevState.next + 10 }))
+  }
   /**
    * Pushes the target expanded code block to the state. During the re-render,
    * this value is used to expand/fold unmodified code.
@@ -443,6 +477,7 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
     );
   };
 
+
   /**
    * Generates the entire diff view.
    */
@@ -450,136 +485,160 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
     const { oldValue, newValue, splitView, disableWordDiff, compareMethod, schemaRequest, schemaResponse } = this.props;
     var v = new Validator();
     
-  var content = newValue;
-  var occurrence = content.match(/Body  \:/g).length;
-  const body_pattern_to_find = "Body  :";
-  const body_pattern_to_find_v2 = "Body   :";
-  const header_pattern_to_find = "Header: ";
-  var flag = false
-  var result = [];
-  var headerres:string[] = [];
-  const regex = /\[\d{4}/g;
-  const yearDatePattern = content.match(regex)[0];
-  for(var i = 0; i < occurrence; i ++) {
-    var body_index = content.indexOf("{",content.indexOf(body_pattern_to_find)+1);
-    var next_timestamp_index = content.indexOf(yearDatePattern,content.indexOf(body_pattern_to_find)+1)
-    if(next_timestamp_index < body_index) {
-      result[i] = "{}";
-      flag = true
-    } 
-    else if(body_index < 0) {
-      result[i] = "{}";
-    }
-    else {
-      result[i] = content.substring(body_index,content.indexOf(yearDatePattern,content.indexOf(body_pattern_to_find)+1)-1);
-    }
-    var header_index = content.indexOf("{",content.indexOf(header_pattern_to_find)+1)
-    headerres[i] = content.substring(header_index,content.indexOf(yearDatePattern,content.indexOf(header_pattern_to_find)+1)-1)
-    content = content.replace(content.substring(content.indexOf(body_pattern_to_find) - 10,content.indexOf(yearDatePattern,content.indexOf(body_pattern_to_find)+1)),"");
-    content = content.replace(content.substring(content.indexOf(header_pattern_to_find) - 10,content.indexOf(yearDatePattern,content.indexOf(header_pattern_to_find)+1)),"");
-    if(occurrence === 1 && !flag) {
-      var body_index2 = content.indexOf("{",content.indexOf(body_pattern_to_find_v2)+1);
-      result[1] = content.substring(body_index2,content.indexOf(yearDatePattern,content.indexOf(body_pattern_to_find_v2)+1)-1);
+    var content = newValue;
+    var occurrence = content.match(/Body  \:/g).length;
+    const body_pattern_to_find = "Body  :";
+    const body_pattern_to_find_v2 = "Body   :";
+    const header_pattern_to_find = "Header: ";
+    var flag = false
+    var result = [];
+    var headerres:string[] = [];
+    const regex = /\[\d{4}/g;
+    const yearDatePattern = content.match(regex)[0];
+    for(var i = 0; i < occurrence; i ++) {
+      var body_index = content.indexOf("{",content.indexOf(body_pattern_to_find)+1);
+      var next_timestamp_index = content.indexOf(yearDatePattern,content.indexOf(body_pattern_to_find)+1)
+      if(next_timestamp_index < body_index) {
+        result[i] = "{}";
+        flag = true
+      } 
+      else if(body_index < 0) {
+        result[i] = "{}";
+      }
+      else {
+        result[i] = content.substring(body_index,content.indexOf(yearDatePattern,content.indexOf(body_pattern_to_find)+1)-1);
+      }
       var header_index = content.indexOf("{",content.indexOf(header_pattern_to_find)+1)
-      headerres[1] = content.substring(header_index,content.indexOf(yearDatePattern,content.indexOf(header_pattern_to_find)+1)-1)
-      content = content.replace(content.substring(content.indexOf(body_pattern_to_find_v2) - 10,content.indexOf(yearDatePattern,content.indexOf(body_pattern_to_find_v2)+1)),"");
+      headerres[i] = content.substring(header_index,content.indexOf(yearDatePattern,content.indexOf(header_pattern_to_find)+1)-1)
+      content = content.replace(content.substring(content.indexOf(body_pattern_to_find) - 10,content.indexOf(yearDatePattern,content.indexOf(body_pattern_to_find)+1)),"");
       content = content.replace(content.substring(content.indexOf(header_pattern_to_find) - 10,content.indexOf(yearDatePattern,content.indexOf(header_pattern_to_find)+1)),"");
-    }
-  }
-  var ValidationResult = null
-  var listofErrors : { property: string, instance: string,parent_and_property: string, enums:[]}[] = [];
-  var schemaContent=["xp;[fvbscplaceholderasdasaa"];
-  var counter = 0
-  result.forEach(element => {
-    if(null !== element) {
-      if(counter==0){
-        var tempConcatVar ="{"
-        var temporaryBodyStringHolder = tempConcatVar.concat("\"header\":",headerres[counter],",\"body\":",element,"}")
-        var ParsedJsonHeaderandBody = JSON.parse(temporaryBodyStringHolder)
-        ValidationResult = v.validate(ParsedJsonHeaderandBody, JSON.parse(schemaRequest));
-        console.log("ParsedJsonHeaderandBody_request",ParsedJsonHeaderandBody)
-        counter++
-      }
-      else{
-        var tempConcatVar ="{"
-        var temporaryBodyStringHolder = tempConcatVar.concat("\"header\":",headerres[counter],",\"body\":",element,"}")
-        var ParsedJsonHeaderandBody = JSON.parse(temporaryBodyStringHolder)
-        ValidationResult = v.validate(ParsedJsonHeaderandBody, JSON.parse(schemaResponse));
-        console.log("ParsedJsonHeaderandBody_response",ParsedJsonHeaderandBody)
-      }
-      
-      schemaContent = schemaContent.concat(ValidationResult.schema.required) 
-      if(ValidationResult!=null){
-        ValidationResult.errors.forEach(element => {
-          var temp = element.property.substring(element.property.lastIndexOf(".")+1,element.property.length)
-          temp = temp.includes("[") ? temp.substring(0,temp.indexOf("[")) : temp ;
-          if(element.argument==null){
-            listofErrors.push({
-            property :temp,
-            instance :element.instance,
-            parent_and_property: "-=xzcadaaplaceholder/*-+-*/",
-            enums: element.argument
-          });
-          }
-          else{
-            listofErrors.push({
-              property :temp,
-              instance :element.instance,
-              parent_and_property: element.argument,
-              enums: element.argument
-            });
-          }
-        });
+      if(occurrence === 1 && !flag) {
+        var body_index2 = content.indexOf("{",content.indexOf(body_pattern_to_find_v2)+1);
+        result[1] = content.substring(body_index2,content.indexOf(yearDatePattern,content.indexOf(body_pattern_to_find_v2)+1)-1);
+        var header_index = content.indexOf("{",content.indexOf(header_pattern_to_find)+1)
+        headerres[1] = content.substring(header_index,content.indexOf(yearDatePattern,content.indexOf(header_pattern_to_find)+1)-1)
+        content = content.replace(content.substring(content.indexOf(body_pattern_to_find_v2) - 10,content.indexOf(yearDatePattern,content.indexOf(body_pattern_to_find_v2)+1)),"");
+        content = content.replace(content.substring(content.indexOf(header_pattern_to_find) - 10,content.indexOf(yearDatePattern,content.indexOf(header_pattern_to_find)+1)),"");
       }
     }
-  });
-  console.log("listofErrors", listofErrors)
-  var tempReq  = ""
-  var tempHed = ""
-  var concatenatedStr = tempReq.concat(result[0],headerres[0],result[1],headerres[1])
-  var concatenatedHeader = tempHed.concat(headerres[0],headerres[1])
-  const { lineInformation, diffLines } = computeLineInformation(
-    oldValue,
-    newValue,
-    disableWordDiff,
-    compareMethod,
-    listofErrors,
-    concatenatedStr,
-    schemaContent,
-    concatenatedHeader,
-  );
-
-    const extraLines = this.props.extraLinesSurroundingDiff < 0
-      ? 0
-      : this.props.extraLinesSurroundingDiff;
-    let skippedLines: number[] = [];
-    return lineInformation.map(
-      (line: LineInformation, i: number): JSX.Element => {
-        const diffBlockStart = diffLines[0];
-        const currentPosition = diffBlockStart - i;
-        const diffNodes = splitView
-          ? this.renderSplitView(line, i)
-          : this.renderInlineView(line, i);
-
-        if (currentPosition === extraLines && skippedLines.length > 0) {
-          const { length } = skippedLines;
-          skippedLines = [];
-          return (
-            <React.Fragment key={i}>
-              {this.renderSkippedLineIndicator(
-                length,
-                diffBlockStart,
-                line.left.lineNumber,
-                line.right.lineNumber,
-              )}
-              {diffNodes}
-            </React.Fragment>
-          );
+    var ValidationResult = null
+    var listofErrors : { property: string, instance: string,parent_and_property: string, enums:[]}[] = [];
+    var schemaContent=["xp;[fvbscplaceholderasdasaa"];
+    var counter = 0
+    result.forEach(element => {
+      if(null !== element) {
+        if(counter==0){
+          var tempConcatVar ="{"
+          var temporaryBodyStringHolder = tempConcatVar.concat("\"header\":",headerres[counter],",\"body\":",element,"}")
+          var ParsedJsonHeaderandBody = JSON.parse(temporaryBodyStringHolder)
+          ValidationResult = v.validate(ParsedJsonHeaderandBody, JSON.parse(schemaRequest));
+          // console.log("ParsedJsonHeaderandBody_request",ParsedJsonHeaderandBody)
+          counter++
         }
-        return diffNodes;
-      },
+        else{
+          var tempConcatVar ="{"
+          var temporaryBodyStringHolder = tempConcatVar.concat("\"header\":",headerres[counter],",\"body\":",element,"}")
+          var ParsedJsonHeaderandBody = JSON.parse(temporaryBodyStringHolder)
+          ValidationResult = v.validate(ParsedJsonHeaderandBody, JSON.parse(schemaResponse));
+          // console.log("ParsedJsonHeaderandBody_response",ParsedJsonHeaderandBody)
+        }
+        // console.log("validation",ValidationResult)
+        // schemaContent = schemaContent.concat(typeof ValidationResult.schema.required == "boolean"?""+ValidationResult.schema.required:ValidationResult.schema.required) 
+        schemaContent = schemaContent.concat(ValidationResult.schema.required) 
+
+        if(ValidationResult!=null){
+          for (var i = 0, len = ValidationResult.errors.length; i < len; i++) {
+              let element =  ValidationResult.errors[i];
+              var temp = element.property.substring(element.property.lastIndexOf(".")+1,element.property.length)
+              temp = temp.includes("[") ? temp.substring(0,temp.indexOf("[")) : temp ;
+              if(element.argument==null){
+                listofErrors.push({
+                property :temp,
+                instance :element.instance,
+                parent_and_property: "-=xzcadaaplaceholder/*-+-*/",
+                enums: element.argument
+              });
+              }
+              else{
+                listofErrors.push({
+                  property :temp,
+                  instance :element.instance,
+                  parent_and_property: element.argument,
+                  enums: element.argument
+                });
+              }
+            // Do stuff with arr[i]
+          }
+          // ValidationResult.errors.forEach(element => {
+          //   var temp = element.property.substring(element.property.lastIndexOf(".")+1,element.property.length)
+          //   temp = temp.includes("[") ? temp.substring(0,temp.indexOf("[")) : temp ;
+          //   if(element.argument==null){
+          //     listofErrors.push({
+          //     property :temp,
+          //     instance :element.instance,
+          //     parent_and_property: "-=xzcadaaplaceholder/*-+-*/",
+          //     enums: element.argument
+          //   });
+          //   }
+          //   else{
+          //     listofErrors.push({
+          //       property :temp,
+          //       instance :element.instance,
+          //       parent_and_property: element.argument,
+          //       enums: element.argument
+          //     });
+          //   }
+          // });
+        }
+      }
+    });
+    // console.log("listofErrors", listofErrors)
+    var tempReq  = ""
+    var tempHed = ""
+    var concatenatedStr = tempReq.concat(result[0],headerres[0],result[1],headerres[1])
+    var concatenatedHeader = tempHed.concat(headerres[0],headerres[1])
+    const { lineInformation, diffLines } = computeLineInformation(
+      oldValue,
+      newValue,
+      disableWordDiff,
+      compareMethod,
+      listofErrors,
+      concatenatedStr,
+      schemaContent,
+      concatenatedHeader,
     );
+
+      const extraLines = this.props.extraLinesSurroundingDiff < 0
+        ? 0
+        : this.props.extraLinesSurroundingDiff;
+      let skippedLines: number[] = [];
+      return lineInformation.map(
+        (line: LineInformation, i: number): JSX.Element => {
+          const diffBlockStart = diffLines[0];
+          const currentPosition = diffBlockStart - i;
+          const diffNodes = splitView
+            ? this.renderSplitView(line, i)
+            : this.renderInlineView(line, i);
+          if (currentPosition === extraLines && skippedLines.length > 0) {
+            const { length } = skippedLines;
+            skippedLines = [];
+            return (
+              <React.Fragment key={i}>
+                {this.renderSkippedLineIndicator(
+                  length,
+                  diffBlockStart,
+                  line.left.lineNumber,
+                  line.right.lineNumber,
+                )}
+                {diffNodes}
+              </React.Fragment>
+            );
+          }
+          return diffNodes;
+        },
+      );
   }
+
 
   public render = (): JSX.Element => {
     const {
@@ -596,10 +655,14 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
     if (typeof oldValue !== 'string' || typeof newValue !== 'string') {
       throw Error('"oldValue" and "newValue" should be strings');
     }
-    this.styles = this.computeStyles(this.props.styles, useDarkTheme);
-    const nodes = this.renderDiff().filter((val) => {
-      return val != null;
-    });
+    // this.styles = this.computeStyles(this.props.styles, useDarkTheme);
+    // const nodes = this.renderDiff().filter((val) => {
+    //   return val != null;
+    // });
+
+    // this.setState({data:nodes,
+    // current: nodes.slice(this.state.prev, this.state.next)
+    // })
 
     const title = (leftTitle || rightTitle)
       && <tr>
@@ -615,12 +678,24 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
         }
       </tr>;
     return (
+      <InfiniteScroll 
+        dataLength={this.state.current.length}
+        next={this.getMoreData}
+        hasMore={this.state.hasMore}
+        // style={{overflow:'hidden'}}
+        loader={<h4>Loading...</h4>}
+      >
         <table className={cn(this.styles.diffContainer, { [this.styles.splitView]: splitView })}>
           <tbody>
             {title}
-            {nodes}
+              { this.state.current && this.state.current.map((item) => {
+                  return item
+              })
+
+              }
           </tbody>
         </table>
+      </InfiniteScroll>
     );
   };
 }

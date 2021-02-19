@@ -259,60 +259,78 @@ const computeLineInformation = (
                 // console.log('value',value);
                 var flag = true
                 var flag1= true; 
-              listoferrors.forEach(element => {
-                  var inEnum = false
-                  var i;
-                  for (i = 0; i < element.enums.length; i++) {
-                    //console.log(element.enums, "---x---" , element.enums[i])
-                    if(rightValue.includes(element.enums[i]) && element.enums[i]>1){
-                      inEnum = true
+                // listoferrors.forEach(element => {
+                for (let x =0, len = listoferrors.length; x < len; x++){
+                    let element = listoferrors[x];
+                    // var inEnum = false
+                    // var i;
+                    // for (i = 0; i < element.enums.length; i++) {
+                    //   //console.log(element.enums, "---x---" , element.enums[i])
+                    //   if(rightValue.includes(element.enums[i]) && element.enums[i]>1){
+                    //     inEnum = true
+                    //   }
+                    // console.log("element",element)
+                    // }
+                    //console.log(rightValue,"and",localStorage.getItem('temp')," includes ", element.instance ,"and",element.property)
+                    //|| (rightValue.includes(element.property) && inEnum) || (rightValue.includes(element.property) && localStorage.getItem('temp').includes(element.instance))  
+                    if((rightValue.includes(element.property) && rightValue.includes(element.instance)) || (rightValue.includes(element.instance) && localStorage.getItem('temp').includes(element.property)) ){
+                      right.type = DiffType.REMOVED
+                      left.type = DiffType.REMOVED
+                      flag = false
                     }
                   }
-                  //console.log(rightValue,"and",localStorage.getItem('temp')," includes ", element.instance ,"and",element.property)
-                  //|| (rightValue.includes(element.property) && inEnum) || (rightValue.includes(element.property) && localStorage.getItem('temp').includes(element.instance))  
-                  if((rightValue.includes(element.property) && rightValue.includes(element.instance)) || (rightValue.includes(element.instance) && localStorage.getItem('temp').includes(element.property)) ){
-                    right.type = DiffType.REMOVED
-                    left.type = DiffType.REMOVED
-                    flag = false
-                  }
-                  else{
-                    if(schemaContents!=undefined){
-                      var tempString = element.parent_and_property.toString()
-                      var temp = tempString.substring(tempString.lastIndexOf(".")+1,tempString.length)
-                      
-                      schemaContents.forEach(element1 => {
-                        if((element1!=undefined && flag == true && rightValue.includes("\""+element1+"\"") && bodyContents.includes(rightValue.toString()))){
-                          right.type = DiffType.ADDED
-                          left.type = DiffType.ADDED
-                          flag1=false
+                    // else{
+                      if(schemaContents!=undefined && flag){
+                        // var tempString = element.parent_and_property.toString()
+                        // var temp = tempString.substring(tempString.lastIndexOf(".")+1,tempString.length)
+                        // console.log("schemaContents",schemaContents)
+                        // console.log('rightValue',rightValue)
+                        // schemaContents.forEach(element1 => {
+                        for(let x =0, len = schemaContents.length, localTemp = localStorage.getItem('temp'); x < len; x++){
+                          let element1 = schemaContents[x];
+                          if (element1 != undefined){
+                            if ( 
+                              (rightValue.includes("\""+element1+"\"") && bodyContents.includes(rightValue.toString()))
+                            || (( (headerContents.includes(localTemp) && headerContents.includes(rightValue.toString()) 
+                            || bodyContents.includes(localStorage.getItem('temp')) && bodyContents.includes(rightValue.toString())) && localTemp.includes("\""+element1+"\"")) )){
+                              right.type = DiffType.ADDED
+                              left.type = DiffType.ADDED
+                              flag1=false
+                            }
+                          }
+                          // if((element1!=undefined && flag == true &&)){
+                          //   right.type = DiffType.ADDED
+                          //   left.type = DiffType.ADDED
+                          //   flag1=false
+                          // }
+                          // else if(element1!=undefined && flag == true &&  !rightValue.includes(element.instance))){
+                          //   right.type = DiffType.ADDED
+                          //   left.type = DiffType.ADDED
+                          //   flag1=false
+                          // }
+                          // else if(element1!=undefined && flag == true && bodyContents.includes(localStorage.getItem('temp')) && bodyContents.includes(rightValue.toString())  && (localStorage.getItem('temp').includes("\""+element1+"\"") && !rightValue.includes(element.instance))){
+                          //   right.type = DiffType.ADDED
+                          //   left.type = DiffType.ADDED
+                          //   flag1=false
+                          // }
+                          // else if(element1!=undefined && element.parent_and_property.includes(element1) && bodyContents.includes(rightValue.toString()) && rightValue.includes("\""+temp+"\"") ){
+                          //   console.log("paapy _links","wowowowowow")
+                          //   right.type = DiffType.ADDED
+                          //   left.type = DiffType.ADDED
+                          //   flag1=false
+                          //   flag=true
+                          // }
+                        // });
                         }
-                        else if(element1!=undefined && flag == true && headerContents.includes(localStorage.getItem('temp')) && headerContents.includes(rightValue.toString())  && (localStorage.getItem('temp').includes("\""+element1+"\"") && !rightValue.includes(element.instance))){
-                          right.type = DiffType.ADDED
-                          left.type = DiffType.ADDED
-                          flag1=false
-                        }
-                        else if(element1!=undefined && flag == true && bodyContents.includes(localStorage.getItem('temp')) && bodyContents.includes(rightValue.toString())  && (localStorage.getItem('temp').includes("\""+element1+"\"") && !rightValue.includes(element.instance))){
-                          right.type = DiffType.ADDED
-                          left.type = DiffType.ADDED
-                          flag1=false
-                        }
-                        // else if(element1!=undefined && element.parent_and_property.includes(element1) && bodyContents.includes(rightValue.toString()) && rightValue.includes("\""+temp+"\"") ){
-                        //   console.log("paapy _links","wowowowowow")
-                        //   right.type = DiffType.ADDED
-                        //   left.type = DiffType.ADDED
-                        //   flag1=false
-                        //   flag=true
-                        // }
-                      });
+                      }
+                    // }
+                    if(flag1 == true){
+                      flag = false
+                      right.type = DiffType.REMOVED
+                      left.type = DiffType.REMOVED
                     }
-                  }
-                  
-                  if(flag1 == true){
-                    flag = false
-                    right.type = DiffType.REMOVED
-                    left.type = DiffType.REMOVED
-                  }
-              });
+                // }
+                // });
 
                 if(!bodyContents.includes(rightValue.toString())){
                   
@@ -338,8 +356,9 @@ const computeLineInformation = (
           right.lineNumber = rightLineNumber;
           right.value = line;
           var flag = true
-              listoferrors.forEach(element => {
-                
+              // listoferrors.forEach(element => {
+              for (let x = 0, len = listoferrors.length; x < len; x++) {
+                let element = listoferrors[x];   
                 if(right.value.includes(element.property) && right.value.includes(element.instance)){
                   right.type = DiffType.REMOVED
                   left.type = DiffType.REMOVED
@@ -347,11 +366,11 @@ const computeLineInformation = (
                 }
 
                 if(flag == true){
-                 right.type = DiffType.REMOVED
+                  right.type = DiffType.REMOVED
                   left.type = DiffType.REMOVED
                 }
-              });
-
+              // });
+              }
               if(!bodyContents.includes(right.value.toString())){
                 flag = true
                 right.type = DiffType.ADDED

@@ -38,7 +38,8 @@
 		"emotion": "^10.0.14",
 		"jsonschema": "^1.2.5",
 		"memoize-one": "^5.0.4",
-		"prop-types": "^15.6.2"
+		"prop-types": "^15.6.2",
+		"react-infinite-scroll-component": "^6.0.0"
 	},
 	"devDependencies": {
 		"@types/classnames": "^2.2.6",

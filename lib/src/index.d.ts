@@ -126,6 +126,7 @@ declare class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiff
      * @param rightBlockLineNumber First right line number after the current code fold block.
      */
     private renderSkippedLineIndicator;
+    private getMoreData;
     /**
      * Generates the entire diff view.
      */
