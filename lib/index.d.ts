@@ -28,11 +28,6 @@ export interface ReactDiffViewerProps {
 }
 export interface ReactDiffViewerState {
     expandedBlocks?: number[];
-    prev: number;
-    next: number;
-    hasMore: boolean;
-    current: JSX.Element[];
-    data: JSX.Element[];
 }
 declare class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerState> {
     private styles;
@@ -61,7 +56,6 @@ declare class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiff
      * refs.
      */
     resetCodeBlocks: () => boolean;
-    getMoreData: () => void;
     /**
      * Pushes the target expanded code block to the state. During the re-render,
      * this value is used to expand/fold unmodified code.

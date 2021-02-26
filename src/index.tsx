@@ -70,11 +70,11 @@ export interface ReactDiffViewerProps {
 export interface ReactDiffViewerState {
   // Array holding the expanded code folding.
   expandedBlocks?: number[],
-  prev: number,
-  next: number,
-  hasMore: boolean,
-  current : JSX.Element[],
-  data: JSX.Element[],
+  // prev: number,
+  // next: number,
+  // hasMore: boolean,
+  // current : JSX.Element[],
+  // data: JSX.Element[],
 }
 
 class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerState> {
@@ -123,17 +123,17 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
 
   public constructor(props: ReactDiffViewerProps) {
     super(props);
-    this.styles = this.computeStyles(this.props.styles, false);
-    let data = this.renderDiff().filter((val) => {
-      return val != null;
-    });
+    // this.styles = this.computeStyles(this.props.styles, false);
+    // let data = this.renderDiff().filter((val) => {
+    //   return val != null;
+    // });
     this.state = {
       expandedBlocks: [],
-      prev: 0,
-      next: 300,
-      hasMore: true,
-      data: data,
-      current :data.slice(0,300)
+      // prev: 0,
+      // next: 300,
+      // hasMore: true,
+      // data: data,
+      // current :data.slice(0,300)
     };
   }
 
@@ -151,25 +151,25 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
     return false;
   }
 
-  public getMoreData = () => {
-    if (this.state.current.length === this.state.data.length) {
-      this.setState({hasMore:false});
-      return;
-    }
-    setTimeout(() => {
-        this.setState({
-          current:this.state.current.concat(this.state.data.slice(this.state.prev, this.state.next))
-        })
-    //   setCurrent(current.concat(this.state..slice(count.prev + 10, count.next + 10)))
-    }, 100)
+  // public getMoreData = () => {
+  //   if (this.state.current.length === this.state.data.length) {
+  //     this.setState({hasMore:false});
+  //     return;
+  //   }
+  //   setTimeout(() => {
+  //       this.setState({
+  //         current:this.state.current.concat(this.state.data.slice(this.state.prev, this.state.next))
+  //       })
+  //   //   setCurrent(current.concat(this.state..slice(count.prev + 10, count.next + 10)))
+  //   }, 100)
   
-    this.setState(prevState => ({
-        prev: prevState.prev + 300,
-        next: prevState.next + 300
-      }));
-    // this.setState({prev: prev +10, next: next +10})
-    // setCount((prevState) => ({ prev: prevState.prev + 10, next: prevState.next + 10 }))
-  }
+  //   this.setState(prevState => ({
+  //       prev: prevState.prev + 300,
+  //       next: prevState.next + 300
+  //     }));
+  //   // this.setState({prev: prev +10, next: next +10})
+  //   // setCount((prevState) => ({ prev: prevState.prev + 10, next: prevState.next + 10 }))
+  // }
   /**
    * Pushes the target expanded code block to the state. During the re-render,
    * this value is used to expand/fold unmodified code.
@@ -655,10 +655,10 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
     if (typeof oldValue !== 'string' || typeof newValue !== 'string') {
       throw Error('"oldValue" and "newValue" should be strings');
     }
-    // this.styles = this.computeStyles(this.props.styles, useDarkTheme);
-    // const nodes = this.renderDiff().filter((val) => {
-    //   return val != null;
-    // });
+    this.styles = this.computeStyles(this.props.styles, useDarkTheme);
+    const nodes = this.renderDiff().filter((val) => {
+      return val != null;
+    });
 
     // this.setState({data:nodes,
     // current: nodes.slice(this.state.prev, this.state.next)
@@ -678,24 +678,25 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
         }
       </tr>;
     return (
-      <InfiniteScroll 
-        dataLength={this.state.current.length}
-        next={this.getMoreData}
-        hasMore={this.state.hasMore}
-        // style={{overflow:'hidden'}}
-        loader={<h4>Loading...</h4>}
-      >
+      // <InfiniteScroll 
+      //   dataLength={this.state.current.length}
+      //   next={this.getMoreData}
+      //   hasMore={this.state.hasMore}
+      //   // style={{overflow:'hidden'}}
+      //   loader={<h4>Loading...</h4>}
+      // >
         <table className={cn(this.styles.diffContainer, { [this.styles.splitView]: splitView })}>
           <tbody>
             {title}
-              { this.state.current && this.state.current.map((item) => {
+            {nodes}
+              {/* { this.state.current && this.state.current.map((item) => {
                   return item
               })
 
-              }
+              } */}
           </tbody>
         </table>
-      </InfiniteScroll>
+      // </InfiniteScroll>
     );
   };
 }
