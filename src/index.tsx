@@ -540,7 +540,7 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
           let tempElem = element;
           if (element[len] == ']' && element[0] != element[len]){
             // tempElem = element.substr(0, len-1);
-            tempElem = "[".concat(tempElem);
+            tempElem = "[\n".concat(tempElem);
           }
           // console.log(tempElem)
           var temporaryBodyStringHolder = tempConcatVar.concat("\"header\":",headerres[counter],",\"body\":",tempElem,"}")
@@ -663,10 +663,6 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
     if (typeof oldValue !== 'string' || typeof newValue !== 'string') {
       throw Error('"oldValue" and "newValue" should be strings');
     }
-    this.styles = this.computeStyles(this.props.styles, useDarkTheme);
-    const nodes = this.renderDiff().filter((val) => {
-      return val != null;
-    });
 
     // this.setState({data:nodes,
     // current: nodes.slice(this.state.prev, this.state.next)
