@@ -26,6 +26,7 @@ export interface DiffInformation {
   value?: string | DiffInformation[];
   lineNumber?: number;
   type?: DiffType;
+  location?: string
 }
 
 export interface LineInformation {
@@ -347,7 +348,7 @@ const computeLineInformation = (
                   const computedDiff = computeDiff(line, rightValue as string, compareMethod,flag);
                   right.value = computedDiff.right;
                   left.value = computedDiff.left;
-                }
+                } 
               }
             }
           }
@@ -388,11 +389,12 @@ const computeLineInformation = (
         right.type = DiffType.DEFAULT;
         right.value = line;
       }
-
+      
       counter += 1;
       return { right, left };
     }).filter(Boolean);
   };
+
 
   diffArray
     .forEach(({ added, removed, value }: diff.Change, index): void => {

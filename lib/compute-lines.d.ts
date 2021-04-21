@@ -17,6 +17,7 @@ export interface DiffInformation {
     value?: string | DiffInformation[];
     lineNumber?: number;
     type?: DiffType;
+    location?: string;
 }
 export interface LineInformation {
     left?: DiffInformation;

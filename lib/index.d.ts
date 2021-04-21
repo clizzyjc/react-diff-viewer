@@ -23,7 +23,7 @@ export interface ReactDiffViewerProps {
     highlightLines?: string[];
     styles?: ReactDiffViewerStylesOverride;
     useDarkTheme?: boolean;
-    leftTitle?: string | JSX.Element;
+    leftTitle?: string;
     rightTitle?: string | JSX.Element;
 }
 export interface ReactDiffViewerState {
@@ -136,6 +136,7 @@ declare class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiff
      * @param rightBlockLineNumber First right line number after the current code fold block.
      */
     private renderSkippedLineIndicator;
+    insertMissing: (temp: any, leftTitle: any, index: any, nextArrayObjectBracket: any, schema: any, missing: any, lineNumber: any, location: any, deducter: any) => any;
     /**
      * Generates the entire diff view.
      */
