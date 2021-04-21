@@ -1013,10 +1013,6 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
     if (typeof oldValue !== 'string' || typeof newValue !== 'string') {
       throw Error('"oldValue" and "newValue" should be strings');
     }
-    // this.styles = this.computeStyles(this.props.styles, useDarkTheme);
-    // const nodes = this.renderDiff().filter((val) => {
-    //   return val != null;
-    // });
 
     // this.setState({data:nodes,
     // current: nodes.slice(this.state.prev, this.state.next)
