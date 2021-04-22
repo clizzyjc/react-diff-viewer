@@ -805,58 +805,68 @@ class DiffViewer extends React.Component<ReactDiffViewerProps, ReactDiffViewerSt
       if (value.left.value != undefined){
         if(Array.isArray(leftVal)){
           if(typeof leftVal[0] == 'object' && leftVal[0]!= undefined) {
-            let ndx = 0;
-            if ( /\S/.test(leftVal[0].value.replace('"','')) == false){
-              ndx = leftVal[2] != undefined? 2: 1;
-            }
-
-            flagDoubleObj = leftVal[ndx].value.includes(':');
+            // let ndx = 0;
+            // if ( /\S/.test(leftVal[0].value.replace('"','')) == false){
+            //   ndx = leftVal[2] != undefined? 2: 1;
+            // }
+            // leftVal.map
+            // console.log(JSON.stringify(leftVal[ndx]),ndx,JSON.stringify(value.left.value))
+            
+            // flagDoubleObj = leftVal[ndx].value.includes(':');
             leftVal = leftVal.map((elem) => {
                 return elem.value
                 }).join();
+            flagDoubleObj = (leftVal.match(/":/g) || []).length == 1 ? leftVal.includes("Parameters to Override") == false ? true : false : false
           }else{
-              let ndx = 0;
-              if (/\S/.test(leftVal[0].replace('"','')) == false){
-                ndx = leftVal[2] != undefined? 2: 1;
-              }
+              // let ndx = 0;
+              // if (/\S/.test(leftVal[0].replace('"','')) == false){
+              //   ndx = leftVal[2] != undefined? 2: 1;
+              // }
 
-              flagDoubleObj = leftVal[ndx].includes(':');
+              // flagDoubleObj = leftVal[ndx].includes(':');
               leftVal = leftVal.join();
+              flagDoubleObj = (leftVal.match(/":/g) || []).length == 1 ?  leftVal.includes("Parameters to Override") == false ? true : false : false
           }
         } 
         leftVal = leftVal.replaceAll(",",'').split(':');
       }
+      
       if (value.right.value != undefined){
         if(Array.isArray(rightVal)){
 
           if(typeof rightVal[0] == 'object') {
-            let ndx = 0;
-            if (/\S/.test(rightVal[0].value.replace('"','')) == false){
-              ndx = rightVal[2] != undefined? 2: 1;
-            }
+            // let ndx = 0;
+            // if (/\S/.test(rightVal[0].value.replace('"','')) == false){
+            //   ndx = rightVal[2] != undefined? 2: 1;
+            // }
 
-            flagDoubleObj = rightVal[ndx].value.includes(':');
+            // flagDoubleObj = rightVal[ndx].value.includes(':');
 
              rightVal = rightVal.map((elem) => {
                return elem.value
              }).join();
-           }else{
-            let ndx = 0;
-            if (/\S/.test(rightVal[0].replace('"','')) == false){
-              ndx = rightVal[2] != undefined? 2: 1;
-            }
+             flagDoubleObj = (rightVal.match(/":/g) || []).length == 1 ? rightVal.includes("Parameters to Override") == false ? true : false : false
 
-            flagDoubleObj = rightVal[ndx].includes(':');
+           }else{
+            // let ndx = 0;
+            // if (/\S/.test(rightVal[0].replace('"','')) == false){
+            //   ndx = rightVal[2] != undefined? 2: 1;
+            // }
+
+            // flagDoubleObj = rightVal[ndx].includes(':');
             rightVal = rightVal.join();
+
+            flagDoubleObj = (rightVal.match(/":/g) || []).length == 1 ?  rightVal.includes("Parameters to Override") == false ? true : false : false
+
            }
         } 
         rightVal = rightVal.replaceAll(",",'').split(':');
       }
-      
       if (value.left.value == undefined || value.right.value == undefined  || flagDoubleObj){
         if (value.right.value == undefined || flagDoubleObj ){
           if ( leftVal.length > 1 ){
             //missing left side
+
             if (nextArrayObjectBracket != null && (value.left.lineNumber-nextArrayObjectBracket.deducter) >= nextArrayObjectBracket.lineNumber ){
               nextArrayObjectBracket = null;
             }
